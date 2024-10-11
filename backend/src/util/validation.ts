@@ -16,6 +16,13 @@ export const loginValidation = checkSchema({
 });
 
 export const signupValidation = checkSchema({
+   username: {
+      trim: true,
+      isLength: {
+         options: { min: 3 },
+         errorMessage: 'Please enter a longer username.'
+      }
+   },
    email: {
       normalizeEmail: true,
       isEmail: {
