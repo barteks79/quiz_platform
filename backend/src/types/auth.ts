@@ -1,20 +1,15 @@
 import type { Request } from 'express';
+import { type ValidationError, Result } from 'express-validator';
 
-type ValidationErrorField = {
-   location: string,
-   msg: string,
-   path: string,
-   type: string
-}
+export class MyValidationError extends Error {
+   status: number;
+   inputs: Result<ValidationError>;
 
-export class ValidationError extends Error {
-   inputs: { errors: ValidationErrorField[] };
-
-   constructor(inputs: object) {
+   constructor(inputs: Result<ValidationError>) {
       super();
       this.message = 'Validation failed.';
       this.status = 422;
-      this.inputs = inputs.errors;
+      this.inputs = inputs;
    }
 }
 

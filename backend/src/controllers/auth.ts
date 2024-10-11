@@ -1,10 +1,14 @@
 import { validationResult } from 'express-validator';
+import { MyValidationError } from '../types/auth';
+
 import type { Response, NextFunction } from 'express';
 import type { LoginReq, SignupReq, EditReq } from '../types/auth';
 
 export const postLogin = async (req: LoginReq, res: Response, next: NextFunction) => {
    const result = validationResult(req);
    if (!result.isEmpty()) {
+      const error = new MyValidationError(result);
+      return next(error);
    }
 };
 
