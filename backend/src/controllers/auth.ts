@@ -13,6 +13,11 @@ export const postLogin = async (req: LoginReq, res: Response, next: NextFunction
 };
 
 export const putSignup = async (req: SignupReq, res: Response, next: NextFunction) => {
+   const result = validationResult(req);
+   if (!result.isEmpty()) {
+      const error = new MyValidationError(result);
+      return next(error);
+   }
 };
 
 export const patchEdit = async (req: EditReq, res: Response, next: NextFunction) => {

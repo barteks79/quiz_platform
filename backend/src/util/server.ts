@@ -1,7 +1,7 @@
-import type { Application } from "express";
+import type { Application } from 'express';
 
 export const runServer = (app: Application, port: number) => {
    app.listen(port, () => {
-      console.log(`Listening on port ${port}...`)
-   })
-}
+      console.log(`Listening on port ${port}...`);
+   });
+};
