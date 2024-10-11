@@ -32,7 +32,7 @@ export const signupValidation = checkSchema({
       custom: {
          options: (value, { req }) => {
             if (value !== req.body.password) {
-               throw new Error('Password do not match.');
+               throw new Error('Passwords do not match.');
             }
             return true;
          }

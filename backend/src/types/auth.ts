@@ -3,13 +3,13 @@ import { type ValidationError, Result } from 'express-validator';
 
 export class MyValidationError extends Error {
    status: number;
-   inputs: Result<ValidationError>;
+   inputs: ValidationError[];
 
    constructor(inputs: Result<ValidationError>) {
       super();
       this.message = 'Validation failed.';
       this.status = 422;
-      this.inputs = inputs;
+      this.inputs = inputs.array();
    }
 }
 

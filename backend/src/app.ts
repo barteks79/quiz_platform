@@ -1,14 +1,5 @@
-import express, {
-   type Application,
-   type Request,
-   type NextFunction,
-   type Response
-} from 'express';
-
-import {
-   type ValidationError,
-   Result
-} from 'express-validator';
+import express, { type Application, type Request, type NextFunction, type Response } from 'express';
+import { type ValidationError } from 'express-validator';
 
 import { json } from 'body-parser';
 import authRoutes from './routes/auth';
@@ -31,7 +22,7 @@ app.use((_req: Request, res: Response, next: NextFunction) => {
 app.use('/auth', authRoutes);
 
 // ERROR
-type ErrorProperties = { message: string; status: number; inputs?: Result<ValidationError> }
+type ErrorProperties = { message: string; status: number; inputs?: ValidationError[] }
 app.use((err: ErrorProperties, req: Request, res: Response, next: NextFunction) => {
    const { message, status, inputs } = err;
    res.status(status).json({ message, inputs });
