@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
-import { MyValidationError } from '../types/auth';
+import { MyError } from '../types/auth';
+import User from '../models/user'
 
 import type { Request, Response, NextFunction } from 'express';
 import type { LoginReq, SignupReq, EditReq } from '../types/auth';
@@ -7,7 +8,14 @@ import type { LoginReq, SignupReq, EditReq } from '../types/auth';
 export const postLogin = async (req: LoginReq, res: Response, next: NextFunction) => {
    const result = validationResult(req);
    if (!result.isEmpty()) {
-      const error = new MyValidationError(result);
+      const error = new MyError('Validation failed.', 422, result);
+      return next(error);
+   }
+
+   const { email, password } = req.body;
+   const user = User.findOne({ email })
+   if (!user) {
+      const error = new MyError('Invalid data provided.', 401);
       return next(error);
    }
 };
@@ -15,7 +23,7 @@ export const postLogin = async (req: LoginReq, res: Response, next: NextFunction
 export const putSignup = async (req: SignupReq, res: Response, next: NextFunction) => {
    const result = validationResult(req);
    if (!result.isEmpty()) {
-      const error = new MyValidationError(result);
+      const error = new MyError('Validation failed.', 422, result);
       return next(error);
    }
 };
