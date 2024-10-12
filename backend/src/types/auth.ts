@@ -1,5 +1,9 @@
 import type { Request } from 'express';
 
+export interface IsAuthReq extends Request {
+   userId?: string;
+}
+
 export interface LoginReq extends Request {
    body: {
       email: string;

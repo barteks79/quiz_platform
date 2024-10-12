@@ -76,7 +76,13 @@ export const putSignup = async (req: SignupReq, res: Response, next: NextFunctio
    }
 };
 
-export const patchEdit = async (_req: EditReq, _res: Response, _next: NextFunction) => {
+export const patchEdit = async (req: EditReq, _res: Response, next: NextFunction) => {
+   // VALIDATION
+   const result = validationResult(req);
+   if (!result.isEmpty()) {
+      const error = new MyError('Validation failed.', 422, result);
+      return next(error);
+   }
 };
 
 export const postLogout = async (_req: Request, _res: Response, _next: NextFunction) => {
