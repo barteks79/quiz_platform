@@ -10,6 +10,6 @@ router.put('/signup', signupValidation, putSignup);
 
 router.patch('/edit', patchEdit);
 
-router.post('/logout', postLogout)
+router.post('/logout', postLogout);
 
 export default router;

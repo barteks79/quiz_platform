@@ -29,4 +29,4 @@ app.use((err: ErrorProperties, req: Request, res: Response, next: NextFunction) 
 });
 
 // SERVER
-runServer(app, 4000);
+(async () => await runServer(app, 4000))();
