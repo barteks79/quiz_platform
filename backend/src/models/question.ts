@@ -2,10 +2,10 @@ import { Schema, model, Document, SchemaTypes } from 'mongoose';
 import { IAnswer } from './answer';
 
 export interface IQuestion extends Document {
-   content: string,
-   answers: IAnswer[],
-   points: number,
-   isMultipleChoice: boolean,
+   content: string;
+   answers: IAnswer[];
+   points: number;
+   isMultipleChoice: boolean;
 }
 
 const questionSchema = new Schema<IQuestion>({

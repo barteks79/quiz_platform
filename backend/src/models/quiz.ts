@@ -1,13 +1,14 @@
-import { Schema, model, Document, ObjectId, SchemaTypes } from 'mongoose';
-import { IQuestion } from './question';
+import { Schema, model, Document, SchemaTypes } from 'mongoose';
+import { type IQuestion } from './question';
+import { type IUser } from './user'
 
 export interface IQuiz extends Document {
-   title: string,
-   questions: IQuestion[],
-   ageCategory: number,
-   creatorId: ObjectId,
-   createdAt: string,
-   editedAt: string,
+   title: string;
+   questions: IQuestion[];
+   ageCategory: number;
+   creatorId: IUser;
+   createdAt: string;
+   editedAt: string;
 }
 
 const quizSchema = new Schema<IQuiz>({
