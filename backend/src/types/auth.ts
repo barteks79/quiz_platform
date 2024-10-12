@@ -1,17 +1,4 @@
 import type { Request } from 'express';
-import { type ValidationError, Result } from 'express-validator';
-
-export class MyError extends Error {
-   status: number;
-   inputs?: ValidationError[];
-
-   constructor(message: string, status: number, inputs?: Result<ValidationError>) {
-      super();
-      this.message = message;
-      this.status = status;
-      this.inputs = inputs?.array();
-   }
-}
 
 export interface LoginReq extends Request {
    body: {

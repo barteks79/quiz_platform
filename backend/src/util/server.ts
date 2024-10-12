@@ -5,6 +5,7 @@ import type { Application } from 'express';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+// DATABASE
 const { DB_USER, DB_PASSWORD, DB_CLUSTER, DB_NAME } = process.env;
 const DB_URI: string = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_CLUSTER}.njhtx.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=${DB_CLUSTER}`;
 
