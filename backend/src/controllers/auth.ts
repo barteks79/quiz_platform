@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken';
-import { compare } from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
 import { validationResult } from 'express-validator';
 
 import { MyError, catchHandler } from '../util/error';
@@ -12,7 +12,6 @@ import type { LoginReq, SignupReq, EditReq } from '../types/auth';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
-
 
 export const postLogin = async (req: LoginReq, res: Response, next: NextFunction) => {
    // VALIDATION
@@ -65,19 +64,20 @@ export const putSignup = async (req: SignupReq, res: Response, next: NextFunctio
    }
 
    // CREATING USER
-   const { username, age, password } = req.body;
-   const createdUser = new User({ username, email, password, age });
+   const { name, age, password } = req.body;
+   const hashedPassword = await hash(password, 12);
+   const createdUser: IUser = new User({ name, email, password: hashedPassword, age });
 
    try {
       await createdUser.save();
-      res.status(201).json({ message: 'Signed up successfully.', userId: createdUser._id })
+      res.status(201).json({ message: 'Signed up successfully.', userId: createdUser._id });
    } catch (err: unknown) {
       catchHandler(err, next);
    }
 };
 
-export const patchEdit = async (req: EditReq, res: Response, next: NextFunction) => {
+export const patchEdit = async (_req: EditReq, _res: Response, _next: NextFunction) => {
 };
 
-export const postLogout = async (req: Request, res: Response, next: NextFunction) => {
+export const postLogout = async (_req: Request, _res: Response, _next: NextFunction) => {
 };

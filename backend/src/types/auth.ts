@@ -9,7 +9,7 @@ export interface LoginReq extends Request {
 
 export interface SignupReq extends Request {
    body: {
-      username: string;
+      name: string;
       email: string;
       password: string;
       confirmPassword: string;
@@ -19,7 +19,7 @@ export interface SignupReq extends Request {
 
 export interface EditReq extends Request {
    body: {
-      username: string;
+      name: string;
       email: string;
       age: number;
    };

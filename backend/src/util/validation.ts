@@ -16,7 +16,7 @@ export const loginValidation = checkSchema({
 });
 
 export const signupValidation = checkSchema({
-   username: {
+   name: {
       trim: true,
       isLength: {
          options: { min: 3 },
