@@ -8,6 +8,11 @@ import User, { IUser } from '../models/user';
 import type { Request, Response, NextFunction } from 'express';
 import type { LoginReq, SignupReq, EditReq } from '../types/auth';
 
+// DOTENV
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+
 export const postLogin = async (req: LoginReq, res: Response, next: NextFunction) => {
    const result = validationResult(req);
    if (!result.isEmpty()) {

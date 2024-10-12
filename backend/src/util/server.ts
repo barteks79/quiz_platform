@@ -1,14 +1,12 @@
 import { connect } from 'mongoose';
 import type { Application } from 'express';
 
-const DB_URI: string = `
-   mongodb+srv://
-   ${process.env.DB_USER}:
-   ${process.env.DB_PASSWORD}@
-   ${process.env.DB_CLUSTER}.njhtx.mongodb.net/
-   ${process.env.DB_NAME}?retryWrites=true&w=majority&appName=
-   ${process.env.DB_CLUSTER}
-   `;
+// DOTENV
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const { DB_USER, DB_PASSWORD, DB_CLUSTER, DB_NAME } = process.env;
+const DB_URI: string = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_CLUSTER}.njhtx.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=${DB_CLUSTER}`;
 
 export const runServer = async (app: Application, port: number) => {
    try {
