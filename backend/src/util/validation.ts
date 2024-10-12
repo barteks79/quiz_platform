@@ -62,3 +62,87 @@ export const signupValidation = checkSchema({
       }
    }
 });
+
+export const createQuizValidation = checkSchema({
+   title: {
+      trim: true,
+      isLength: {
+         options: { min: 5 },
+         errorMessage: 'Quiz title must be at least 5 characters long.',
+      }
+   },
+   questions: {
+      isArray: {
+         options: { min: 3 },
+         errorMessage: 'Quiz must consist of at least 3 questions.'
+      }
+   },
+   'questions.*.content': {
+      isString: {
+         errorMessage: 'Question must be a string.'
+      },
+      isLength: {
+         options: { min: 5, max: 60 },
+         errorMessage: 'Question must be from 5 to 60 characters long.'
+      }
+   },
+   'questions.*.answers': {
+      custom: {
+         options: (value) => {
+            if (!Array.isArray(value)) {
+               throw new Error('Answers must be an array.');
+            }
+            if (value.length < 2) {
+               throw new Error('Questions must consist of at least 2 answers.');
+            }
+            if (value.length > 6) {
+               throw new Error('Questions can\'t have more than 6 answers.');
+            }
+            return true;
+         }
+      }
+   },
+   'questions.*.answers.*.content': {
+      exists: {
+         errorMessage: 'Answer content is required.',
+      },
+   },
+   'questions.*.answers.*.isCorrect': {
+      exists: {
+         errorMessage: 'Answer isCorrect is required.',
+      },
+      isBoolean: {
+         errorMessage: 'Answer isCorrect must be true or false.'
+      }
+   },
+   'questions.*.points': {
+      exists: {
+         errorMessage: 'Points are required.',
+      },
+      isInt: {
+         options: { min: 1, max: 10 },
+         errorMessage: 'Points must be a positive integer between 1 and 10.'
+      }
+   },
+   'questions.*.isMultipleChoice': {
+      exists: {
+         errorMessage: 'Question isMultipleChoice is required.',
+      },
+      isBoolean: {
+         errorMessage: 'Question isMultipleChoice must be true or false.'
+      }
+   },
+   ageCategory: {
+      isInt: {
+         errorMessage: 'Age category must be a positive integer.'
+      },
+      custom: {
+         options: (value) => {
+            if (value !== 13 && value !== 16 && value !== 18) {
+               throw new Error('Entered age category is not correct.');
+            }
+            return true;
+         }
+      }
+   }
+});

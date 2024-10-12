@@ -3,9 +3,9 @@ import { IQuiz } from './quiz';
 
 export interface IUser extends Document {
    name: string;
-   age: number;
    email: string;
    password: string;
+   age: number;
    favorites: [{ quizId: IQuiz, isCompleted: boolean }];
    completed: [{ quizId: IQuiz, points: number }];
 }
@@ -15,16 +15,16 @@ const userSchema = new Schema<IUser>({
       type: String,
       required: true
    },
-   age: {
-      type: Number,
-      required: true
-   },
    email: {
       type: String,
       required: true,
    },
    password: {
       type: String,
+      required: true
+   },
+   age: {
+      type: Number,
       required: true
    },
    favorites: [

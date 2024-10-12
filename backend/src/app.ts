@@ -2,8 +2,10 @@ import express, { type Application, type Request, type NextFunction, type Respon
 import { type ValidationError } from 'express-validator';
 
 import { json } from 'body-parser';
-import authRoutes from './routes/auth';
 import { runServer } from './util/server';
+
+import authRoutes from './routes/auth';
+import quizRouter from './routes/quiz';
 
 const app: Application = express();
 
@@ -20,6 +22,7 @@ app.use((_req: Request, res: Response, next: NextFunction) => {
 
 // ROUTES
 app.use('/auth', authRoutes);
+app.use('/quiz', quizRouter);
 
 // ERROR
 type ErrorProperties = { message: string; status: number; inputs?: ValidationError[] }

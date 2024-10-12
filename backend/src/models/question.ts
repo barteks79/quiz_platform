@@ -1,9 +1,8 @@
-import { Schema, model, Document, SchemaTypes } from 'mongoose';
-import { IAnswer } from './answer';
+import { Schema, model, Document } from 'mongoose';
 
 export interface IQuestion extends Document {
    content: string;
-   answers: IAnswer[];
+   answers: [{ content: string, isCorrect: boolean }];
    points: number;
    isMultipleChoice: boolean;
 }
@@ -15,9 +14,14 @@ const questionSchema = new Schema<IQuestion>({
    },
    answers: [
       {
-         type: SchemaTypes.ObjectId,
-         ref: 'Answer',
-         required: true,
+         content: {
+            type: String,
+            required: true
+         },
+         isCorrect: {
+            type: Boolean,
+            required: true
+         }
       }
    ],
    points: {

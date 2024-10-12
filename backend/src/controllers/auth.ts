@@ -66,7 +66,7 @@ export const putSignup = async (req: SignupReq, res: Response, next: NextFunctio
    // CREATING USER
    const { name, age, password } = req.body;
    const hashedPassword = await hash(password, 12);
-   const createdUser: IUser = new User({ name, email, password: hashedPassword, age });
+   const createdUser: IUser = new User({ name, age, email, password: hashedPassword, favorites: [], completed: [] });
 
    try {
       await createdUser.save();
