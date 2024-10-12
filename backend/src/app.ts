@@ -23,7 +23,7 @@ app.use('/auth', authRoutes);
 
 // ERROR
 type ErrorProperties = { message: string; status: number; inputs?: ValidationError[] }
-app.use((err: ErrorProperties, req: Request, res: Response, next: NextFunction) => {
+app.use((err: ErrorProperties, _req: Request, res: Response, _next: NextFunction) => {
    const { message, status, inputs } = err;
    res.status(status).json({ message, inputs });
 });
