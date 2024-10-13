@@ -7,7 +7,34 @@ import User from '../models/user';
 import { isValidObjectId } from 'mongoose';
 
 import { type Response, type NextFunction } from 'express';
-import { type CreateQuizReq, type EditQuizReq, type DeleteQuizReq } from '../types/quiz';
+import type { GetAllQuizzesReq, CreateQuizReq, EditQuizReq, DeleteQuizReq } from '../types/quiz';
+
+export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: NextFunction) => {
+   // VALIDATION
+   const result = validationResult(req);
+   if (!result.isEmpty()) {
+      const error = new MyError('Wrong data provided.', 422, result);
+      return next(error);
+   }
+
+   const { page, perPage, ageCategory } = req.body;
+
+   try {
+      // QUIZZES COUNT
+      const quizzesAmount = await Quiz.countDocuments({
+         ageCategory: { $gte: ageCategory }
+      });
+
+      // FOUND QUIZZES
+      const quizzes: IQuiz[] = await Quiz.find({
+         ageCategory: { $gte: ageCategory }
+      }).skip((page - 1) * perPage).limit(perPage).select('-_id title ageCategory createdAt').populate('creatorId', 'name');
+
+      res.status(200).json({ message: 'Fetched quizzes successfully.', quizzesAmount, quizzes });
+   } catch (err) {
+      catchHandler(err, next);
+   }
+};
 
 export const createQuiz = async (req: CreateQuizReq, res: Response, next: NextFunction) => {
    // VALIDATION
@@ -17,7 +44,9 @@ export const createQuiz = async (req: CreateQuizReq, res: Response, next: NextFu
       return next(error);
    }
 
-   const { title, ageCategory, questions } = req.body;
+   const {
+      title, ageCategory, questions
+   } = req.body;
 
    // CREATING QUIZ WITH NO QUESTIONS YET
    const createdQuiz: IQuiz = new Quiz({
@@ -79,7 +108,9 @@ export const editQuiz = async (req: EditQuizReq, res: Response, next: NextFuncti
       return next(error);
    }
 
-   const { title, questions, ageCategory } = req.body;
+   const {
+      title, questions, ageCategory
+   } = req.body;
    const prevQuestions = [...quiz.questions];
 
    // UPDATING QUIZ

@@ -63,6 +63,31 @@ export const signupValidation = checkSchema({
    }
 });
 
+export const getAllQuizzesValidation = checkSchema({
+   page: {
+      isInt: {
+         options: { min: 0 },
+         errorMessage: 'Page must be an integer.'
+      }
+   },
+   perPage: {
+      isInt: {
+         options: { min: 1 },
+         errorMessage: 'Page must be a positive integer.'
+      }
+   },
+   ageCategory: {
+      custom: {
+         options: (value) => {
+            if (value !== 13 && value !== 16 && value !== 18) {
+               throw new Error('Wrong age category.');
+            }
+            return true;
+         }
+      }
+   }
+});
+
 export const createQuizValidation = checkSchema({
    title: {
       trim: true,
