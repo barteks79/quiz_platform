@@ -1,7 +1,8 @@
-import { Schema, model, Document, SchemaTypes } from 'mongoose';
+import { Schema, model, Document, SchemaTypes, ObjectId } from 'mongoose';
 import { IQuiz } from './quiz';
 
 export interface IUser extends Document {
+   _id: ObjectId;
    name: string;
    email: string;
    password: string;

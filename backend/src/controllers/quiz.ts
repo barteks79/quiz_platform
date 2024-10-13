@@ -1,8 +1,8 @@
 import { validationResult } from 'express-validator';
-import { MyError } from '../util/error';
+import { catchHandler, MyError } from '../util/error';
 
-import Question from '../models/question'
-import Quiz from '../models/quiz';
+import Question, { type IQuestion } from '../models/question';
+import Quiz, { type IQuiz } from '../models/quiz';
 
 import { type Response, type NextFunction } from 'express';
 import { type CreateQuizReq } from '../types/quiz';
@@ -14,13 +14,35 @@ export const postCreateQuiz = async (req: CreateQuizReq, res: Response, next: Ne
       return next(error);
    }
 
-   const { questions } = req.body;
-   questions.forEach(question => {
-      const createdQuestion = new Question({
-         content: question.content,
-         answers: question.answers,
-         points: question.points,
-         isMultipleChoice: question.isMultipleChoice
-      })
-   })
+   const { title, ageCategory, questions } = req.body;
+
+   // CREATING QUIZ WITH NO QUESTIONS YET
+   const createdQuiz: IQuiz = new Quiz({
+      title,
+      ageCategory,
+      questions: [],
+      creatorId: req.userId
+   });
+
+   try {
+      for (const question of questions) {
+         // CREATING QUESTION
+         const createdQuestion: IQuestion = new Question({
+            content: question.content,
+            answers: question.answers,
+            points: question.points,
+            isMultipleChoice: question.isMultipleChoice
+         });
+
+         // SAVING QUESTION AND ADDING ITS ID TO QUIZ
+         await createdQuestion.save();
+         createdQuiz.questions.push(createdQuestion._id);
+      }
+
+      // SAVE QUIZ TO DATABASE
+      await createdQuiz.save();
+      res.status(201).json({ message: 'Quiz successfully created.', quizId: createdQuiz._id });
+   } catch (err) {
+      catchHandler(err, next);
+   }
 };

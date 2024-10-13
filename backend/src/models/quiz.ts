@@ -1,12 +1,11 @@
-import { Schema, model, Document, SchemaTypes } from 'mongoose';
-import { type IQuestion } from './question';
-import { type IUser } from './user'
+import { Schema, model, Document, SchemaTypes, ObjectId } from 'mongoose';
 
 export interface IQuiz extends Document {
+   _id: ObjectId;
    title: string;
-   questions: IQuestion[];
+   questions: ObjectId[];
    ageCategory: number;
-   creatorId: IUser;
+   creatorId: ObjectId;
    createdAt: string;
    editedAt: string;
 }

@@ -73,8 +73,18 @@ export const createQuizValidation = checkSchema({
    },
    questions: {
       isArray: {
-         options: { min: 3 },
-         errorMessage: 'Quiz must consist of at least 3 questions.'
+         errorMessage: 'Questions must be an array.'
+      },
+      custom: {
+         options: (value) => {
+            if (value.length < 3) {
+               throw new Error('Quiz must consist of at least 3 questions.');
+            }
+            if (value.length > 20) {
+               throw new Error('Quiz can\'t have more than 20 questions.');
+            }
+            return true;
+         }
       }
    },
    'questions.*.content': {

@@ -1,6 +1,7 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, ObjectId } from 'mongoose';
 
 export interface IQuestion extends Document {
+   _id: ObjectId;
    content: string;
    answers: [{ content: string, isCorrect: boolean }];
    points: number;

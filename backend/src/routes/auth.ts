@@ -1,7 +1,7 @@
 import { Router, type IRouter } from 'express';
 import { postLogin, putSignup, patchEdit, postLogout } from '../controllers/auth';
 import { loginValidation, signupValidation } from '../util/validation';
-import isAuth from '../middlewares/is-auth'
+import isAuth from '../middlewares/is-auth';
 
 const router: IRouter = Router();
 

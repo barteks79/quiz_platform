@@ -1,7 +1,8 @@
 import type { Request } from 'express';
+import { type ObjectId } from 'mongoose';
 
 export interface IsAuthReq extends Request {
-   userId?: string;
+   userId?: ObjectId;
 }
 
 export interface LoginReq extends Request {

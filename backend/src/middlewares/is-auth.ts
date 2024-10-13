@@ -3,7 +3,7 @@ import { MyError } from '../util/error';
 
 import type { JwtPayload } from 'jsonwebtoken';
 import type { Response, NextFunction } from 'express';
-import { IsAuthReq } from '../types/auth'
+import { IsAuthReq } from '../types/auth';
 
 // DOTENV
 import * as dotenv from 'dotenv';

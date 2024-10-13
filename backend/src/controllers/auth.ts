@@ -39,7 +39,7 @@ export const postLogin = async (req: LoginReq, res: Response, next: NextFunction
 
    try {
       // GENERATING TOKEN
-      const token = sign({ userId: user._id, email }, process.env.JWT_KEY || '', { expiresIn: '3h' });
+      const token = sign({ userId: user._id }, process.env.JWT_KEY || '', { expiresIn: '3h' });
       const expirationTime = new Date().getTime() + 1000 * 60 * 60 * 3;
       res.status(200).json({ message: 'Logged in successfully.', token, expirationTime });
    } catch (err: unknown) {
