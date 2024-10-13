@@ -43,3 +43,8 @@ export interface EditQuizReq extends Request {
       ]
    }
 }
+
+export interface DeleteQuizReq extends Request {
+   userId?: ObjectId;
+   params: { quizId?: string; }
+}
