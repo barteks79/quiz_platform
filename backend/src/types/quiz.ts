@@ -9,6 +9,12 @@ export interface GetAllQuizzesReq extends Request {
    };
 }
 
+export interface GetSingleQuizReq extends Request {
+   params: {
+      quizId?: string;
+   }
+}
+
 export interface CreateQuizReq extends Request {
    userId?: ObjectId;
    body: {

@@ -7,7 +7,7 @@ import User from '../models/user';
 import { isValidObjectId } from 'mongoose';
 
 import { type Response, type NextFunction } from 'express';
-import type { GetAllQuizzesReq, CreateQuizReq, EditQuizReq, DeleteQuizReq } from '../types/quiz';
+import type { GetAllQuizzesReq, GetSingleQuizReq, CreateQuizReq, EditQuizReq, DeleteQuizReq } from '../types/quiz';
 
 export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: NextFunction) => {
    // VALIDATION
@@ -36,6 +36,25 @@ export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: 
    }
 };
 
+export const getSingleQuiz = async (req: GetSingleQuizReq, res: Response, next: NextFunction) => {
+   const { quizId } = req.params;
+
+   // CHECKING IF QUIZ ID FORMAT IS CORRECT
+   if (!isValidObjectId(quizId)) {
+      const error = new MyError('Quiz not found.', 404);
+      return next(error);
+   }
+
+   // CHECKING FOR QUIZ EXISTENCE
+   const quiz = await Quiz.findById(quizId).select('-_id title ageCategory createdAt').populate('questions', '-_id -__v').populate('creatorId', '-_id name');
+   if (!quiz) {
+      const error = new MyError('Quiz not found.', 404);
+      return next(error);
+   }
+
+   res.status(200).json({ message: 'Fetched quiz successfully.', quiz });
+};
+
 export const createQuiz = async (req: CreateQuizReq, res: Response, next: NextFunction) => {
    // VALIDATION
    const result = validationResult(req);
@@ -44,9 +63,7 @@ export const createQuiz = async (req: CreateQuizReq, res: Response, next: NextFu
       return next(error);
    }
 
-   const {
-      title, ageCategory, questions
-   } = req.body;
+   const { title, ageCategory, questions } = req.body;
 
    // CREATING QUIZ WITH NO QUESTIONS YET
    const createdQuiz: IQuiz = new Quiz({
