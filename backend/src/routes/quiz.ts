@@ -1,30 +1,30 @@
 import { Router, type IRouter } from 'express';
 import isAuth from '../middlewares/is-auth';
 import {
-   getAllQuizzes,
-   getSingleQuiz,
+   getQuizzes,
+   getQuiz,
    createQuiz,
    editQuiz,
    deleteQuiz,
-   quizToFavorites,
-   quizToCompleted
+   quizToggleFavorites,
+   quizToggleCompleted
 } from '../controllers/quiz';
 import { getAllQuizzesValidation, createQuizValidation, quizToCompletedValidation } from '../util/validation';
 
 const router: IRouter = Router();
 
-router.get('/', getAllQuizzesValidation, getAllQuizzes);
+router.get('/', getAllQuizzesValidation, getQuizzes);
 
 router.post('/', isAuth, createQuizValidation, createQuiz);
 
-router.get('/:quizId', getSingleQuiz);
+router.get('/:quizId', getQuiz);
 
 router.patch('/:quizId', isAuth, createQuizValidation, editQuiz);
 
 router.delete('/:quizId', isAuth, deleteQuiz);
 
-router.post('/favorite/:quizId', isAuth, quizToFavorites);
+router.post('/favorite/:quizId', isAuth, quizToggleFavorites);
 
-router.post('/completed/:quizId', isAuth, quizToCompletedValidation, quizToCompleted);
+router.post('/completed/:quizId', isAuth, quizToCompletedValidation, quizToggleCompleted);
 
 export default router;

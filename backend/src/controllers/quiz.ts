@@ -7,7 +7,7 @@ import User, { type IUser } from '../models/user';
 import type { Response, NextFunction } from 'express';
 import type { GetAllQuizzesReq, GetSingleQuizReq, CreateQuizReq, EditQuizReq, DeleteQuizReq } from '../types/quiz';
 
-export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: NextFunction) => {
+export const getQuizzes = async (req: GetAllQuizzesReq, res: Response, next: NextFunction) => {
    // VALIDATION
    const isSuccess = validateInputs(req, 'data', next);
    if (!isSuccess) return;
@@ -31,7 +31,7 @@ export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: 
    }
 };
 
-export const getSingleQuiz = async (req: GetSingleQuizReq, res: Response, next: NextFunction) => {
+export const getQuiz = async (req: GetSingleQuizReq, res: Response, next: NextFunction) => {
    // CHECKING FOR QUIZ EXISTENCE
    const { quizId } = req.params;
    const quiz: IQuiz | void = await validateQuizId(quizId, next);
@@ -154,7 +154,7 @@ export const deleteQuiz = async (req: DeleteQuizReq, res: Response, next: NextFu
    }
 };
 
-export const quizToFavorites = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
+export const quizToggleFavorites = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
    // CHECKING FOR USER EXISTENCE
    const user: IUser | void = await validateUserId(req.userId, next);
    if (!user) return;
@@ -187,7 +187,7 @@ export const quizToFavorites = async (req: DeleteQuizReq, res: Response, next: N
    }
 };
 
-export const quizToCompleted = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
+export const quizToggleCompleted = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
    // VALIDATION
    const isSuccess = validateInputs(req, 'data', next);
    if (!isSuccess) return;
