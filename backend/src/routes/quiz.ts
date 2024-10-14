@@ -6,7 +6,7 @@ import {
    createQuiz,
    editQuiz,
    deleteQuiz,
-   quizToFavorite,
+   quizToFavorites,
    quizToCompleted
 } from '../controllers/quiz';
 import { getAllQuizzesValidation, createQuizValidation, quizToCompletedValidation } from '../util/validation';
@@ -23,7 +23,7 @@ router.patch('/:quizId', isAuth, createQuizValidation, editQuiz);
 
 router.delete('/:quizId', isAuth, deleteQuiz);
 
-router.post('/favorite/:quizId', isAuth, quizToFavorite);
+router.post('/favorite/:quizId', isAuth, quizToFavorites);
 
 router.post('/completed/:quizId', isAuth, quizToCompletedValidation, quizToCompleted);
 

@@ -1,6 +1,5 @@
 import { validationResult } from 'express-validator';
 import { MyError, catchHandler, validateUserId, validateQuizId } from '../util/error';
-import { isValidObjectId } from 'mongoose';
 
 import Question, { type IQuestion } from '../models/question';
 import Quiz, { type IQuiz } from '../models/quiz';
@@ -37,20 +36,10 @@ export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: 
 };
 
 export const getSingleQuiz = async (req: GetSingleQuizReq, res: Response, next: NextFunction) => {
-   const { quizId } = req.params;
-
-   // CHECKING IF QUIZ ID FORMAT IS CORRECT
-   if (!isValidObjectId(quizId)) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
-
    // CHECKING FOR QUIZ EXISTENCE
-   const quiz = await Quiz.findById(quizId).select('-_id title ageCategory createdAt').populate('questions', '-_id -__v').populate('creatorId', '-_id name');
-   if (!quiz) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   const { quizId } = req.params;
+   const quiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!quiz) return;
 
    res.status(200).json({ message: 'Fetched quiz successfully.', quiz });
 };
@@ -104,20 +93,10 @@ export const editQuiz = async (req: EditQuizReq, res: Response, next: NextFuncti
       return next(error);
    }
 
-   const { quizId } = req.params;
-
-   // CHECKING IF QUIZ ID FORMAT IS CORRECT
-   if (!isValidObjectId(quizId)) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
-
    // CHECKING FOR QUIZ EXISTENCE
-   const quiz: IQuiz | null = await Quiz.findById(quizId);
-   if (!quiz) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   const { quizId } = req.params;
+   const quiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!quiz) return;
 
    // CHECKING AUTHORIZATION
    if (quiz.creatorId.toString() !== req.userId!.toString()) {
@@ -159,20 +138,10 @@ export const editQuiz = async (req: EditQuizReq, res: Response, next: NextFuncti
 };
 
 export const deleteQuiz = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
-   const { quizId } = req.params;
-
-   // CHECKING IF QUIZ ID FORMAT IS CORRECT
-   if (!isValidObjectId(quizId)) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
-
    // CHECKING FOR QUIZ EXISTENCE
-   const existingQuiz: IQuiz | null = await Quiz.findById(quizId);
-   if (!existingQuiz) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   const { quizId } = req.params;
+   const existingQuiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!existingQuiz) return;
 
    // CHECKING AUTHORIZATION
    if (existingQuiz.creatorId.toString() !== req.userId!.toString()) {
@@ -195,7 +164,7 @@ export const deleteQuiz = async (req: DeleteQuizReq, res: Response, next: NextFu
    }
 };
 
-export const quizToFavorite = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
+export const quizToFavorites = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
    // CHECKING FOR USER EXISTENCE
    const user: IUser | void = await validateUserId(req.userId, next);
    if (!user) return;
