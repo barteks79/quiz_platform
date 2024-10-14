@@ -12,7 +12,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-export const postLogin = async (req: LoginReq, res: Response, next: NextFunction) => {
+export const loginUser = async (req: LoginReq, res: Response, next: NextFunction) => {
    // VALIDATION
    const isSuccess = validateInputs(req, 'validation', next);
    if (!isSuccess) return;
@@ -43,7 +43,7 @@ export const postLogin = async (req: LoginReq, res: Response, next: NextFunction
    }
 };
 
-export const putSignup = async (req: SignupReq, res: Response, next: NextFunction) => {
+export const signupUser = async (req: SignupReq, res: Response, next: NextFunction) => {
    // VALIDATION
    const isSuccess = validateInputs(req, 'validation', next);
    if (!isSuccess) return;
@@ -69,11 +69,11 @@ export const putSignup = async (req: SignupReq, res: Response, next: NextFunctio
    }
 };
 
-export const patchEdit = async (req: EditReq, _res: Response, next: NextFunction) => {
+export const editUser = async (req: EditReq, _res: Response, next: NextFunction) => {
    // VALIDATION
    const isSuccess = validateInputs(req, 'validation', next);
    if (!isSuccess) return;
 };
 
-export const postLogout = async (_req: Request, _res: Response, _next: NextFunction) => {
+export const logoutUser = async (_req: Request, _res: Response, _next: NextFunction) => {
 };

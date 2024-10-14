@@ -1,16 +1,16 @@
 import { Router, type IRouter } from 'express';
-import { postLogin, putSignup, patchEdit, postLogout } from '../controllers/auth';
+import { loginUser, signupUser, editUser, logoutUser } from '../controllers/auth';
 import { loginValidation, signupValidation } from '../util/validation';
 import isAuth from '../middlewares/is-auth';
 
 const router: IRouter = Router();
 
-router.post('/login', loginValidation, postLogin);
+router.post('/login', loginValidation, loginUser);
 
-router.put('/signup', signupValidation, putSignup);
+router.put('/signup', signupValidation, signupUser);
 
-router.patch('/edit', isAuth, patchEdit);
+router.patch('/edit', isAuth, editUser);
 
-router.post('/logout', isAuth, postLogout);
+router.post('/logout', isAuth, logoutUser);
 
 export default router;
