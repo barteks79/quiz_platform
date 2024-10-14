@@ -3,9 +3,17 @@ import { MyError, catchHandler, validateInputs, validateUserId, validateQuizId }
 import Question, { type IQuestion } from '../models/question';
 import Quiz, { type IQuiz } from '../models/quiz';
 import User, { type IUser } from '../models/user';
+import Rating, { type IRating } from '../models/rating';
 
 import type { Response, NextFunction } from 'express';
-import type { GetAllQuizzesReq, GetSingleQuizReq, CreateQuizReq, EditQuizReq, DeleteQuizReq } from '../types/quiz';
+import type {
+   GetAllQuizzesReq,
+   GetSingleQuizReq,
+   CreateQuizReq,
+   EditQuizReq,
+   DeleteQuizReq,
+   AddRatingReq
+} from '../types/quiz';
 
 export const getQuizzes = async (req: GetAllQuizzesReq, res: Response, next: NextFunction) => {
    // VALIDATION
@@ -222,6 +230,32 @@ export const quizToggleCompleted = async (req: DeleteQuizReq, res: Response, nex
          await user.save();
          res.status(200).json({ message: 'Quiz added to completed successfully.', quizId });
       }
+   } catch (err) {
+      catchHandler(err, next);
+   }
+};
+
+export const addRating = async (req: AddRatingReq, res: Response, next: NextFunction) => {
+   // VALIDATION
+   const isSuccess = validateInputs(req, 'data', next);
+   if (!isSuccess) return;
+
+   // CHECKING FOR USER EXISTENCE
+   const user: IUser | void = await validateUserId(req.userId, next);
+   if (!user) return;
+
+   // CHECKING FOR QUIZ EXISTENCE
+   const { quizId } = req.params;
+   const quiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!quiz) return;
+
+   // CREATING NEW RATING
+   const { rate, message } = req.body;
+   const rating: IRating = new Rating({ rate, message, creatorId: req.userId, quizId: quiz._id });
+
+   try {
+      await rating.save();
+      res.status(201).json({ message: 'Rating uploaded successfully.', ratingId: rating._id });
    } catch (err) {
       catchHandler(err, next);
    }

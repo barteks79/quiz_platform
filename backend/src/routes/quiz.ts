@@ -7,9 +7,15 @@ import {
    editQuiz,
    deleteQuiz,
    quizToggleFavorites,
-   quizToggleCompleted
+   quizToggleCompleted,
+   addRating
 } from '../controllers/quiz';
-import { getAllQuizzesValidation, createQuizValidation, quizToCompletedValidation } from '../util/validation';
+import {
+   getAllQuizzesValidation,
+   createQuizValidation,
+   quizToCompletedValidation,
+   quizRatingValidation
+} from '../util/validation';
 
 const router: IRouter = Router();
 
@@ -26,5 +32,7 @@ router.delete('/:quizId', isAuth, deleteQuiz);
 router.post('/favorite/:quizId', isAuth, quizToggleFavorites);
 
 router.post('/completed/:quizId', isAuth, quizToCompletedValidation, quizToggleCompleted);
+
+router.put('/rating/:quizId', isAuth, quizRatingValidation, addRating);
 
 export default router;

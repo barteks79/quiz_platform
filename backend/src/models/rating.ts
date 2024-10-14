@@ -16,7 +16,8 @@ const ratingSchema = new Schema<IRating>({
       required: true
    },
    message: {
-      type: String
+      type: String,
+      required: true
    },
    quizId: {
       type: SchemaTypes.ObjectId,

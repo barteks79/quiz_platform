@@ -223,3 +223,18 @@ export const quizToCompletedValidation = checkSchema({
       }
    }
 });
+
+export const quizRatingValidation = checkSchema({
+   rate: {
+      isInt: {
+         options: { min: 1, max: 10 },
+         errorMessage: 'Rate the quiz in scale from 1 to 10.'
+      }
+   },
+   message: {
+      isLength: {
+         options: { min: 0, max: 100 },
+         errorMessage: 'Your message can\'t have more than 100 characters.'
+      }
+   }
+});

@@ -63,3 +63,12 @@ export interface DeleteQuizReq extends Request {
    params: { quizId?: string; };
    body: { points?: number; };
 }
+
+export interface AddRatingReq extends Request {
+   userId?: ObjectId;
+   params: { quizId?: string; };
+   body: {
+      rate: number;
+      message: string;
+   }
+}
