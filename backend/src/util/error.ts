@@ -1,5 +1,5 @@
 import { isValidObjectId } from 'mongoose';
-import { type ValidationError, Result } from 'express-validator';
+import { type ValidationError, Result, validationResult } from 'express-validator';
 import { type NextFunction } from 'express';
 import User, { type IUser } from '../models/user';
 import Quiz, { IQuiz } from '../models/quiz';
@@ -21,7 +21,18 @@ export const catchHandler = (err: unknown, next: NextFunction) => {
       const error = new MyError(err.message || 'An error occurred.', 500);
       next(error);
    }
-}
+};
+
+export const validateInputs = (req: unknown, type: 'validation' | 'data', next: NextFunction): boolean | void => {
+   const result = validationResult(req!);
+   if (!result.isEmpty()) {
+      const message = type === 'validation' ? 'Validation failed.' : 'Wrong data provided.';
+      const error = new MyError(message, 422, result);
+      return next(error);
+   }
+
+   return true;
+};
 
 export const validateUserId = async (userId: any, next: NextFunction) => {
    if (!isValidObjectId(userId)) {
@@ -36,9 +47,9 @@ export const validateUserId = async (userId: any, next: NextFunction) => {
    }
 
    return user;
-}
+};
 
-export const validateQuizId = async(quizId: any, next: NextFunction) => {
+export const validateQuizId = async (quizId: any, next: NextFunction) => {
    if (!isValidObjectId(quizId)) {
       const error = new MyError('Quiz not found.', 404);
       return next(error);

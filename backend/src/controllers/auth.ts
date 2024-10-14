@@ -1,8 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import { hash, compare } from 'bcryptjs';
-import { validationResult } from 'express-validator';
 
-import { MyError, catchHandler } from '../util/error';
+import { MyError, catchHandler, validateInputs } from '../util/error';
 import User, { IUser } from '../models/user';
 
 import type { Request, Response, NextFunction } from 'express';
@@ -15,11 +14,8 @@ dotenv.config();
 
 export const postLogin = async (req: LoginReq, res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Validation failed.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'validation', next);
+   if (!isSuccess) return;
 
    // EMAIL EXISTENCE
    const { email } = req.body;
@@ -49,11 +45,8 @@ export const postLogin = async (req: LoginReq, res: Response, next: NextFunction
 
 export const putSignup = async (req: SignupReq, res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Validation failed.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'validation', next);
+   if (!isSuccess) return;
 
    // EMAIL EXISTENCE
    const { email } = req.body;
@@ -78,11 +71,8 @@ export const putSignup = async (req: SignupReq, res: Response, next: NextFunctio
 
 export const patchEdit = async (req: EditReq, _res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Validation failed.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'validation', next);
+   if (!isSuccess) return;
 };
 
 export const postLogout = async (_req: Request, _res: Response, _next: NextFunction) => {

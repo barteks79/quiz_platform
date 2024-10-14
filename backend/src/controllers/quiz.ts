@@ -1,5 +1,4 @@
-import { validationResult } from 'express-validator';
-import { MyError, catchHandler, validateUserId, validateQuizId } from '../util/error';
+import { MyError, catchHandler, validateInputs, validateUserId, validateQuizId } from '../util/error';
 
 import Question, { type IQuestion } from '../models/question';
 import Quiz, { type IQuiz } from '../models/quiz';
@@ -10,11 +9,8 @@ import type { GetAllQuizzesReq, GetSingleQuizReq, CreateQuizReq, EditQuizReq, De
 
 export const getAllQuizzes = async (req: GetAllQuizzesReq, res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Wrong data provided.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'data', next);
+   if (!isSuccess) return;
 
    const { page, perPage, ageCategory } = req.body;
 
@@ -46,11 +42,8 @@ export const getSingleQuiz = async (req: GetSingleQuizReq, res: Response, next: 
 
 export const createQuiz = async (req: CreateQuizReq, res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Validation failed.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'validation', next);
+   if (!isSuccess) return;
 
    const { title, ageCategory, questions } = req.body;
 
@@ -87,11 +80,8 @@ export const createQuiz = async (req: CreateQuizReq, res: Response, next: NextFu
 
 export const editQuiz = async (req: EditQuizReq, res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Validation failed.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'validation', next);
+   if (!isSuccess) return;
 
    // CHECKING FOR QUIZ EXISTENCE
    const { quizId } = req.params;
@@ -199,11 +189,8 @@ export const quizToFavorites = async (req: DeleteQuizReq, res: Response, next: N
 
 export const quizToCompleted = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
    // VALIDATION
-   const result = validationResult(req);
-   if (!result.isEmpty()) {
-      const error = new MyError('Wrong data provided.', 422, result);
-      return next(error);
-   }
+   const isSuccess = validateInputs(req, 'data', next);
+   if (!isSuccess) return;
 
    // CHECKING FOR USER EXISTENCE
    const user: IUser | void = await validateUserId(req.userId, next);
