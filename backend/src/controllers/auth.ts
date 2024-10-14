@@ -4,7 +4,7 @@ import { hash, compare } from 'bcryptjs';
 import { MyError, catchHandler, validateInputs, validateUserId } from '../util/error';
 import User, { IUser } from '../models/user';
 
-import type { Request, Response, NextFunction } from 'express';
+import type { Response, NextFunction } from 'express';
 import type { LoginReq, SignupReq, EditReq } from '../types/auth';
 
 // DOTENV
@@ -69,7 +69,7 @@ export const signupUser = async (req: SignupReq, res: Response, next: NextFuncti
    }
 };
 
-export const editUser = async (req: EditReq, _res: Response, next: NextFunction) => {
+export const editUser = async (req: EditReq, res: Response, next: NextFunction) => {
    // VALIDATION
    const isSuccess = validateInputs(req, 'validation', next);
    if (!isSuccess) return;
@@ -89,7 +89,4 @@ export const editUser = async (req: EditReq, _res: Response, next: NextFunction)
    } catch (err) {
       catchHandler(err, next);
    }
-};
-
-export const logoutUser = async (_req: Request, _res: Response, _next: NextFunction) => {
 };
