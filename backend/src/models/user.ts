@@ -7,8 +7,8 @@ export interface IUser extends Document {
    email: string;
    password: string;
    age: number;
-   favorites: [{ quizId: IQuiz, isCompleted: boolean }];
-   completed: [{ quizId: IQuiz, points: number }];
+   favorites: [{ quizId: ObjectId, isCompleted: boolean }];
+   completed: [{ quizId: ObjectId, points: number }];
 }
 
 const userSchema = new Schema<IUser>({

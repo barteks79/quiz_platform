@@ -3,7 +3,7 @@ import { catchHandler, MyError } from '../util/error';
 
 import Question, { type IQuestion } from '../models/question';
 import Quiz, { type IQuiz } from '../models/quiz';
-import User from '../models/user';
+import User, { type IUser } from '../models/user';
 import { isValidObjectId } from 'mongoose';
 
 import { type Response, type NextFunction } from 'express';
@@ -190,6 +190,57 @@ export const deleteQuiz = async (req: DeleteQuizReq, res: Response, next: NextFu
       ]);
 
       res.status(200).json({ message: 'Quiz deleted successfully.', quizId });
+   } catch (err) {
+      catchHandler(err, next);
+   }
+};
+
+export const quizToFavorite = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
+   // CHECKING IF USER EXISTS
+   const user: IUser | null = await User.findById(req.userId);
+   if (!user) {
+      const error = new MyError('Not authenticated.', 401);
+      return next(error);
+   }
+
+   const { quizId } = req.params;
+
+   // CHECKING IF QUIZ ID FORMAT IS CORRECT
+   if (!isValidObjectId(quizId)) {
+      const error = new MyError('Quiz not found.', 404);
+      return next(error);
+   }
+
+   // CHECKING FOR QUIZ EXISTENCE
+   const existingQuiz: IQuiz | null = await Quiz.findById(quizId);
+   if (!existingQuiz) {
+      const error = new MyError('Quiz not found.', 404);
+      return next(error);
+   }
+
+   // CHECKING IF USER ID FORMAT IS CORRECT
+   if (!isValidObjectId(req.userId)) {
+      const error = new MyError('Quiz not found.', 404);
+      return next(error);
+   }
+
+   try {
+      // GETTING INDEX (IF -1 THEN REMOVE ELSE ADD)
+      const favoriteQuizIdx = user.favorites.findIndex(quiz => quiz.quizId.toString() === quizId);
+      if (favoriteQuizIdx !== -1) {
+         // REMOVING FROM FAVORITES
+         user.favorites.splice(favoriteQuizIdx, 1);
+
+         await user.save();
+         res.status(200).json({ message: 'Quiz removed from favorites successfully.', quizId });
+      } else {
+         // ADDING TO FAVORITES
+         const completedQuiz = user.completed.find(quiz => quiz.quizId.toString() === quizId);
+         user.favorites.push({ quizId: existingQuiz._id, isCompleted: !!completedQuiz });
+
+         await user.save();
+         res.status(200).json({ message: 'Quiz added to favorites successfully.', quizId });
+      }
    } catch (err) {
       catchHandler(err, next);
    }
