@@ -5,6 +5,7 @@ import { runServer } from './util/server';
 
 import authRoutes from './routes/auth';
 import quizRouter from './routes/quiz';
+import ratingRoutes from './routes/rating'
 
 import cors from './middlewares/cors';
 import error from './middlewares/error';
@@ -20,6 +21,7 @@ app.use(cors);
 // ROUTES
 app.use('/auth', authRoutes);
 app.use('/quiz', quizRouter);
+app.use('/rating', ratingRoutes);
 
 // ERROR
 app.use(error);
