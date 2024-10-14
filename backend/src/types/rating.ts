@@ -9,3 +9,11 @@ export interface AddRatingReq extends Request {
       message: string;
    };
 }
+
+export interface GetRatingsReq extends Request {
+   params: { quizId?: string; };
+   body: {
+      page: number;
+      perPage: number;
+   }
+}

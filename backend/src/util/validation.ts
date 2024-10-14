@@ -238,3 +238,18 @@ export const quizRatingValidation = checkSchema({
       }
    }
 });
+
+export const getRatingsValidation = checkSchema({
+   page: {
+      isInt: {
+         options: { min: 0 },
+         errorMessage: 'Page must be a positive integer.'
+      }
+   },
+   perPage: {
+      isInt: {
+         options: { min: 1 },
+         errorMessage: 'Per page must be a positive integer.'
+      }
+   }
+})
