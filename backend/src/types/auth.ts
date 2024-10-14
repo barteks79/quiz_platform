@@ -23,9 +23,9 @@ export interface SignupReq extends Request {
 }
 
 export interface EditReq extends Request {
+   userId?: ObjectId;
    body: {
       name: string;
-      email: string;
       age: number;
    };
 }

@@ -63,6 +63,32 @@ export const signupValidation = checkSchema({
    }
 });
 
+export const editUserValidation = checkSchema({
+   name: {
+      trim: true,
+      isLength: {
+         options: { min: 3 },
+         errorMessage: 'Please enter a longer username.'
+      }
+   },
+   age: {
+      isInt: {
+         errorMessage: 'Please enter a positive integer.',
+      },
+      custom: {
+         options: (value) => {
+            if (value < 13) {
+               throw new Error('You must be at least 13 to create an account.');
+            }
+            if (value > 100 || value < 1) {
+               throw new Error('Please enter a correct age.');
+            }
+            return true;
+         }
+      }
+   }
+});
+
 export const getAllQuizzesValidation = checkSchema({
    page: {
       isInt: {

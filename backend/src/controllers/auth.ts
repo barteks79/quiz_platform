@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import { hash, compare } from 'bcryptjs';
 
-import { MyError, catchHandler, validateInputs } from '../util/error';
+import { MyError, catchHandler, validateInputs, validateUserId } from '../util/error';
 import User, { IUser } from '../models/user';
 
 import type { Request, Response, NextFunction } from 'express';
@@ -73,6 +73,22 @@ export const editUser = async (req: EditReq, _res: Response, next: NextFunction)
    // VALIDATION
    const isSuccess = validateInputs(req, 'validation', next);
    if (!isSuccess) return;
+
+   // CHECK FOR USER EXISTENCE
+   const user: IUser | void = await validateUserId(req.userId, next);
+   if (!user) return;
+
+   // UPDATING USER
+   const { name, age } = req.body;
+   if (user.name !== name) user.name = name;
+   if (user.age !== age) user.age = age;
+
+   try {
+      await user.save();
+      res.status(200).json({ message: 'User profile updated successfully', userId: user._id });
+   } catch (err) {
+      catchHandler(err, next);
+   }
 };
 
 export const logoutUser = async (_req: Request, _res: Response, _next: NextFunction) => {
