@@ -92,7 +92,7 @@ export const editUserValidation = checkSchema({
 export const getAllQuizzesValidation = checkSchema({
    page: {
       isInt: {
-         options: { min: 0 },
+         options: { min: 1 },
          errorMessage: 'Page must be an integer.'
       }
    },

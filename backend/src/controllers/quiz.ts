@@ -41,9 +41,10 @@ export const getQuizzes = async (req: GetAllQuizzesReq, res: Response, next: Nex
 export const getQuiz = async (req: GetSingleQuizReq, res: Response, next: NextFunction) => {
    // CHECKING FOR QUIZ EXISTENCE
    const { quizId } = req.params;
-   const quiz: IQuiz | void = await validateQuizId(quizId, next);
-   if (!quiz) return;
+   const existingQuiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!existingQuiz) return;
 
+   const quiz: IQuiz | null = await Quiz.findById(quizId).select('-_id title ageCategory createdAt').populate('questions', '-_id');
    res.status(200).json({ message: 'Fetched quiz successfully.', quiz });
 };
 
