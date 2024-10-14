@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import { catchHandler, MyError } from '../util/error';
+import { MyError, catchHandler, validateUserId, validateQuizId } from '../util/error';
 import { isValidObjectId } from 'mongoose';
 
 import Question, { type IQuestion } from '../models/question';
@@ -196,37 +196,19 @@ export const deleteQuiz = async (req: DeleteQuizReq, res: Response, next: NextFu
 };
 
 export const quizToFavorite = async (req: DeleteQuizReq, res: Response, next: NextFunction) => {
-   // CHECKING IF USER ID FORMAT IS CORRECT
-   if (!isValidObjectId(req.userId)) {
-      const error = new MyError('Not authenticated.', 401);
-      return next(error);
-   }
-
-   // CHECKING IF USER EXISTS
-   const user: IUser | null = await User.findById(req.userId);
-   if (!user) {
-      const error = new MyError('Not authenticated.', 401);
-      return next(error);
-   }
-
-   const { quizId } = req.params;
-
-   // CHECKING IF QUIZ ID FORMAT IS CORRECT
-   if (!isValidObjectId(quizId)) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   // CHECKING FOR USER EXISTENCE
+   const user: IUser | void = await validateUserId(req.userId, next);
+   if (!user) return;
 
    // CHECKING FOR QUIZ EXISTENCE
-   const existingQuiz: IQuiz | null = await Quiz.findById(quizId);
-   if (!existingQuiz) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   const { quizId } = req.params;
+   const existingQuiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!existingQuiz) return;
 
    try {
       // GETTING INDEX (IF -1 THEN REMOVE ELSE ADD)
       const favoriteQuizIdx = user.favorites.findIndex(quiz => quiz.quizId.toString() === quizId);
+
       if (favoriteQuizIdx !== -1) {
          // REMOVING FROM FAVORITES
          user.favorites.splice(favoriteQuizIdx, 1);
@@ -254,33 +236,14 @@ export const quizToCompleted = async (req: DeleteQuizReq, res: Response, next: N
       return next(error);
    }
 
-   // CHECKING IF USER ID FORMAT IS CORRECT
-   if (!isValidObjectId(req.userId)) {
-      const error = new MyError('Not authenticated.', 401);
-      return next(error);
-   }
-
-   // CHECKING IF USER EXISTS
-   const user: IUser | null = await User.findById(req.userId);
-   if (!user) {
-      const error = new MyError('Not authenticated.', 401);
-      return next(error);
-   }
-
-   const { quizId } = req.params;
-
-   // CHECKING IF QUIZ ID FORMAT IS CORRECT
-   if (!isValidObjectId(quizId)) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   // CHECKING FOR USER EXISTENCE
+   const user: IUser | void = await validateUserId(req.userId, next);
+   if (!user) return;
 
    // CHECKING FOR QUIZ EXISTENCE
-   const existingQuiz: IQuiz | null = await Quiz.findById(quizId);
-   if (!existingQuiz) {
-      const error = new MyError('Quiz not found.', 404);
-      return next(error);
-   }
+   const { quizId } = req.params;
+   const existingQuiz: IQuiz | void = await validateQuizId(quizId, next);
+   if (!existingQuiz) return;
 
    try {
       // GETTING INDEX (IF -1 THEN REMOVE, SET FALSE ELSE ADD, SET TRUE)
@@ -298,7 +261,7 @@ export const quizToCompleted = async (req: DeleteQuizReq, res: Response, next: N
          // SETTING COMPLETED IN FAVORITES TO TRUE, ADDING TO COMPLETED
          if (favoriteQuizIdx !== -1) user.favorites[favoriteQuizIdx].isCompleted = true;
          const { points } = req.body;
-         user.completed.push({ quizId: existingQuiz._id, points: points! });
+         user.completed.push({ quizId: existingQuiz._id, points: points || 0 });
 
          await user.save();
          res.status(200).json({ message: 'Quiz added to completed successfully.', quizId });
