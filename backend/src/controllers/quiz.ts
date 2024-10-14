@@ -3,6 +3,7 @@ import { MyError, catchHandler, validateInputs, validateUserId, validateQuizId }
 import Question, { type IQuestion } from '../models/question';
 import Quiz, { type IQuiz } from '../models/quiz';
 import User, { type IUser } from '../models/user';
+import Rating from '../models/rating'
 
 import type { Response, NextFunction } from 'express';
 import type {
@@ -149,6 +150,7 @@ export const deleteQuiz = async (req: DeleteQuizReq, res: Response, next: NextFu
       // DELETING QUIZ AND RELATED QUESTIONS
       await Promise.all([
          Quiz.findByIdAndDelete(quizId),
+         Rating.deleteMany({ quizId: existingQuiz._id }),
          Question.deleteMany({ _id: { $in: existingQuiz.questions } }),
          User.updateMany({}, { $pull: { favorites: { quizId: existingQuiz._id } } }),
          User.updateMany({}, { $pull: { completed: { quizId: existingQuiz._id } } })

@@ -19,7 +19,7 @@ const router: IRouter = Router();
 
 router.get('/', getAllQuizzesValidation, getQuizzes);
 
-router.post('/', isAuth, createQuizValidation, createQuiz);
+router.put('/', isAuth, createQuizValidation, createQuiz);
 
 router.get('/:quizId', getQuiz);
 

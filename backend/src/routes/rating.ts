@@ -5,7 +5,7 @@ import { addRating, getRatings } from '../controllers/rating';
 
 const router: IRouter = Router();
 
-router.get('/:quizId', getRatingsValidation, getRatings)
+router.get('/:quizId', getRatingsValidation, getRatings);
 
 router.put('/:quizId', isAuth, quizRatingValidation, addRating);
 
