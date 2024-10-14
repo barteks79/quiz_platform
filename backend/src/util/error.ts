@@ -1,4 +1,5 @@
 import { type ValidationError, Result } from 'express-validator';
+import { isValidObjectId } from 'mongoose';
 import { type NextFunction } from 'express';
 
 export class MyError extends Error {
@@ -10,6 +11,13 @@ export class MyError extends Error {
       this.message = message;
       this.status = status;
       this.inputs = inputs?.array();
+   }
+}
+
+export const userIdIsObjectId = (userId: any, next: NextFunction) => {
+   if (!isValidObjectId(userId)) {
+      const error = new MyError('Not authenticated.', 401);
+      next(error);
    }
 }
 

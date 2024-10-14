@@ -181,3 +181,19 @@ export const createQuizValidation = checkSchema({
       }
    }
 });
+
+export const quizToCompletedValidation = checkSchema({
+   points: {
+      isInt: {
+         errorMessage: 'Points must be a positive integer.'
+      },
+      custom: {
+         options: (value) => {
+            if (value < 0) {
+               throw new Error('Points must be a positive integer.');
+            }
+            return true;
+         }
+      }
+   }
+});

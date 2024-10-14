@@ -48,7 +48,7 @@ const userSchema = new Schema<IUser>({
             ref: 'Quiz',
             required: true,
          },
-         pointsEarned: {
+         points: {
             type: Number,
             required: true
          }

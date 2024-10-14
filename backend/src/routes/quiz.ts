@@ -1,7 +1,15 @@
 import { Router, type IRouter } from 'express';
 import isAuth from '../middlewares/is-auth';
-import { getAllQuizzes, getSingleQuiz, createQuiz, editQuiz, deleteQuiz, quizToFavorite } from '../controllers/quiz';
-import { getAllQuizzesValidation, createQuizValidation } from '../util/validation';
+import {
+   getAllQuizzes,
+   getSingleQuiz,
+   createQuiz,
+   editQuiz,
+   deleteQuiz,
+   quizToFavorite,
+   quizToCompleted
+} from '../controllers/quiz';
+import { getAllQuizzesValidation, createQuizValidation, quizToCompletedValidation } from '../util/validation';
 
 const router: IRouter = Router();
 
@@ -16,5 +24,7 @@ router.patch('/:quizId', isAuth, createQuizValidation, editQuiz);
 router.delete('/:quizId', isAuth, deleteQuiz);
 
 router.post('/favorite/:quizId', isAuth, quizToFavorite);
+
+router.post('/completed/:quizId', isAuth, quizToCompletedValidation, quizToCompleted);
 
 export default router;

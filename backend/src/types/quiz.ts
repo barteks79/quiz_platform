@@ -12,7 +12,7 @@ export interface GetAllQuizzesReq extends Request {
 export interface GetSingleQuizReq extends Request {
    params: {
       quizId?: string;
-   }
+   };
 }
 
 export interface CreateQuizReq extends Request {
@@ -61,4 +61,5 @@ export interface EditQuizReq extends Request {
 export interface DeleteQuizReq extends Request {
    userId?: ObjectId;
    params: { quizId?: string; };
+   body: { points?: number; };
 }
