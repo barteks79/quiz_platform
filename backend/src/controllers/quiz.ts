@@ -226,7 +226,7 @@ export const quizToggleCompleted = async (req: DeleteQuizReq, res: Response, nex
          // SETTING COMPLETED IN FAVORITES TO TRUE, ADDING TO COMPLETED
          if (favoriteQuizIdx !== -1) user.favorites[favoriteQuizIdx].isCompleted = true;
          const { points } = req.body;
-         user.completed.push({ quizId: existingQuiz._id, points: points || 0 });
+         user.completed.push({ quizId: existingQuiz._id, points: points! });
 
          await user.save();
          res.status(200).json({ message: 'Quiz added to completed successfully.', quizId });

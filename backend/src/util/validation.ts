@@ -18,6 +18,9 @@ export const loginValidation = checkSchema({
 export const signupValidation = checkSchema({
    name: {
       trim: true,
+      exists: {
+        errorMessage: 'Name filed is required.'
+      },
       isLength: {
          options: { min: 3 },
          errorMessage: 'Please enter a longer username.'
@@ -46,6 +49,9 @@ export const signupValidation = checkSchema({
       }
    },
    age: {
+      exists: {
+         errorMessage: 'Age filed is required.'
+      },
       isInt: {
          errorMessage: 'Please enter a positive integer.',
       },
@@ -66,12 +72,18 @@ export const signupValidation = checkSchema({
 export const editUserValidation = checkSchema({
    name: {
       trim: true,
+      exists: {
+         errorMessage: 'Name filed is required.'
+      },
       isLength: {
          options: { min: 3 },
          errorMessage: 'Please enter a longer username.'
       }
    },
    age: {
+      exists: {
+         errorMessage: 'Age filed is required.'
+      },
       isInt: {
          errorMessage: 'Please enter a positive integer.',
       },
@@ -91,18 +103,27 @@ export const editUserValidation = checkSchema({
 
 export const getAllQuizzesValidation = checkSchema({
    page: {
+      exists: {
+         errorMessage: 'Page filed is required.'
+      },
       isInt: {
          options: { min: 1 },
          errorMessage: 'Page must be an integer.'
       }
    },
    perPage: {
+      exists: {
+         errorMessage: 'Per Page filed is required.'
+      },
       isInt: {
          options: { min: 1 },
          errorMessage: 'Page must be a positive integer.'
       }
    },
    ageCategory: {
+      exists: {
+         errorMessage: 'Age Category filed is required.'
+      },
       custom: {
          options: (value) => {
             if (value !== 13 && value !== 16 && value !== 18) {
@@ -117,12 +138,18 @@ export const getAllQuizzesValidation = checkSchema({
 export const createQuizValidation = checkSchema({
    title: {
       trim: true,
+      exists: {
+         errorMessage: 'Title filed is required.'
+      },
       isLength: {
          options: { min: 5 },
          errorMessage: 'Quiz title must be at least 5 characters long.',
       }
    },
    questions: {
+      exists: {
+         errorMessage: 'Question filed is required.'
+      },
       isArray: {
          errorMessage: 'Questions must be an array.'
       },
@@ -210,6 +237,9 @@ export const createQuizValidation = checkSchema({
 
 export const quizToCompletedValidation = checkSchema({
    points: {
+      exists: {
+         errorMessage: 'Points filed is required.'
+      },
       isInt: {
          errorMessage: 'Points must be a positive integer.'
       },
@@ -226,12 +256,18 @@ export const quizToCompletedValidation = checkSchema({
 
 export const quizRatingValidation = checkSchema({
    rate: {
+      exists: {
+         errorMessage: 'Rate filed is required.'
+      },
       isInt: {
          options: { min: 1, max: 10 },
          errorMessage: 'Rate the quiz in scale from 1 to 10.'
       }
    },
    message: {
+      exists: {
+         errorMessage: 'Message filed is required.'
+      },
       isLength: {
          options: { min: 0, max: 100 },
          errorMessage: 'Your message can\'t have more than 100 characters.'
@@ -241,12 +277,18 @@ export const quizRatingValidation = checkSchema({
 
 export const getRatingsValidation = checkSchema({
    page: {
+      exists: {
+         errorMessage: 'Page filed is required.'
+      },
       isInt: {
          options: { min: 0 },
          errorMessage: 'Page must be a positive integer.'
       }
    },
    perPage: {
+      exists: {
+         errorMessage: 'Per Page filed is required.'
+      },
       isInt: {
          options: { min: 1 },
          errorMessage: 'Per page must be a positive integer.'
