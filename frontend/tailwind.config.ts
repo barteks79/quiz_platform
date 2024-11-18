@@ -20,6 +20,14 @@ export default {
 			 background: {
 				light: '#262626',
 				dark: '#1C1C1C'
+			 },
+			 white: {
+				default: '#FFFFFF',
+				'01': '#FFFFFF1A',
+				'02': '#FFFFFF33',
+				'03': '#FFFFFF4D',
+				'06': '#FFFFFF99',
+				'07': '#FFFFFFB3'
 			 }
 		  },
 		  fontFamily: {

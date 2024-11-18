@@ -9,17 +9,19 @@
 }
 
 body {
-    @apply bg-background-dark font-inter;
+    @apply bg-background-dark font-montserrat;
 }
 
 .top-navigation {
-    @apply w-4/5 h-16 border-b border-b-fuchsia-50;
+    @apply flex justify-between items-center px-10 w-4/5 h-16 border-b border-b-white-01 text-white-default;
 }
 
 .nav-list {
+    @apply flex items-center gap-8;
 }
 
 .nav-link {
+    @apply text-white-default text-lg font-medium hover:text-white-06 transition-colors duration-200 ease-in-out;
 }
 
 .nav-link.active {
