@@ -1,3 +1,4 @@
+import TopNav from '@/components/navigation/TopNav';
 import { type PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
 import './globals.css';
@@ -11,6 +12,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     return (
 	  <html lang="en">
 		 <body>
+			<TopNav />
 			{children}
 		 </body>
 	  </html>

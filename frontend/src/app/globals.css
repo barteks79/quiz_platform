@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+/*@tailwind utilities;*/
 
 * {
     box-sizing: border-box;
@@ -9,5 +9,18 @@
 }
 
 body {
-    @apply bg-background-dark;
+    @apply bg-background-dark font-inter;
+}
+
+.top-navigation {
+    @apply w-4/5 h-16 border-b border-b-fuchsia-50;
+}
+
+.nav-list {
+}
+
+.nav-link {
+}
+
+.nav-link.active {
 }
