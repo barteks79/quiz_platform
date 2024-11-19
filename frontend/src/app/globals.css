@@ -9,11 +9,19 @@
 }
 
 body {
-    @apply bg-background-dark font-montserrat;
+    @apply flex w-full bg-background-dark font-montserrat;
+}
+
+main {
+    @apply w-full;
+}
+
+.aside-navigation {
+    @apply w-1/6 h-screen bg-background-light;
 }
 
 .top-navigation {
-    @apply flex justify-between items-center px-10 w-4/5 h-16 border-b border-b-white-01 text-white-default;
+    @apply flex justify-between items-center px-10 h-16 border-b border-b-white-01 text-white-default;
 }
 
 .nav-list {
