@@ -9,7 +9,7 @@
 }
 
 body {
-    @apply flex w-full bg-background-dark font-montserrat;
+    @apply flex w-full bg-background-dark font-inter;
 }
 
 main {
@@ -17,11 +17,34 @@ main {
 }
 
 .aside-navigation {
-    @apply w-1/6 h-screen bg-background-light;
+    @apply flex flex-col items-center
+    w-1/6 h-screen
+    bg-background-light;
+}
+
+.aside-navigation label {
+    @apply inline-block mb-1 font-montserrat font-extralight text-white-default;
+}
+
+.aside-wrapper {
+    @apply py-5 w-5/6 h-screen;
+}
+
+.aside-user {
+    @apply flex justify-between items-center
+    w-full px-5 py-2 mb-10
+    text-white-default bg-white-02 rounded
+    hover:bg-white-03 transition-colors duration-150;
+}
+
+.aside-user.active {
+    @apply bg-white-02;
 }
 
 .top-navigation {
-    @apply flex justify-between items-center px-10 h-16 border-b border-b-white-01 text-white-default;
+    @apply flex justify-between items-center
+    px-10 h-16
+    border-b border-b-white-01 text-white-default;
 }
 
 .nav-list {
@@ -29,7 +52,8 @@ main {
 }
 
 .nav-link {
-    @apply text-white-default text-lg font-medium hover:text-white-06 transition-colors duration-200 ease-in-out;
+    @apply text-white-default font-medium
+    hover:text-white-06 transition-colors duration-200 ease-in-out;
 }
 
 .nav-link.active {

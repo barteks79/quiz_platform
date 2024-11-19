@@ -18,8 +18,8 @@ export default {
 				dark: '#666666'
 			 },
 			 background: {
-				light: '#262626',
-				dark: '#1C1C1C'
+				light: '#222222',
+				dark: '#181818'
 			 },
 			 white: {
 				default: '#FFFFFF',
