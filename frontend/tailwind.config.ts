@@ -10,30 +10,28 @@ export default {
 	   extend: {
 		  colors: {
 			 primary: {
-				light: '#3437E2',
-				dark: '#1B1EEA'
-			 },
-			 secondary: {
-				light: '#999999',
-				dark: '#666666'
+				light: '#2962EB',
+				dark: '#1958F7'
 			 },
 			 background: {
-				light: '#222222',
-				dark: '#181818'
+				light: '#FAFBFB',
+				mid: '#F0F5F6',
+				dark: '#f1f3ef'
 			 },
-			 white: {
-				default: '#FFFFFF',
-				'01': '#FFFFFF1A',
-				'02': '#FFFFFF33',
-				'03': '#FFFFFF4D',
-				'06': '#FFFFFF99',
-				'07': '#FFFFFFB3'
+			 grey: {
+				lighter: '#E5E5E4',
+				light: '#DCDDDC',
+				mid: '#676667',
+				dark: '#565858'
 			 }
 		  },
 		  fontFamily: {
-			 inter: ['Inter', 'Montserrat', 'Arial'],
+			 inter: ['Inter', 'Montserrat'],
 			 montserrat: ['Montserrat', 'Poppins', 'Arial'],
-			 instrument: ['Instrument-Sans', 'Open-Sans', 'Arial']
+			 instrument: ['"Instrument Sans"', 'Poppins', 'Arial']
+		  },
+		  boxShadow: {
+			 aside: '0 0 5px rgba(0, 0, 0, 0.1)'
 		  }
 	   }
     },

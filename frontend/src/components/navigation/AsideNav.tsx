@@ -4,11 +4,8 @@ export default function AsideNav() {
     return (
 	  <aside className="aside-navigation">
 		 <div className="aside-wrapper">
-			<label>Your Account</label>
 			<AsideUser />
-			<ul className="aside-list">
-			    <label>Dashboard</label>
-			</ul>
+			<ul className="aside-list"></ul>
 		 </div>
 	  </aside>
     );

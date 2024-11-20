@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@200;300;400;500;600;700&family=Instrument+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 /*@tailwind utilities;*/
@@ -9,7 +14,7 @@
 }
 
 body {
-    @apply flex w-full bg-background-dark font-inter;
+    @apply flex w-full bg-background-mid;
 }
 
 main {
@@ -18,33 +23,46 @@ main {
 
 .aside-navigation {
     @apply flex flex-col items-center
-    w-1/6 h-screen
-    bg-background-light;
-}
-
-.aside-navigation label {
-    @apply inline-block mb-1 font-montserrat font-extralight text-white-default;
+    w-1/6 h-screen shadow-aside
+    bg-background-dark border-r border-r-grey-light;
 }
 
 .aside-wrapper {
-    @apply py-5 w-5/6 h-screen;
+    @apply py-7 w-5/6 h-screen;
 }
 
 .aside-user {
     @apply flex justify-between items-center
-    w-full px-5 py-2 mb-10
-    text-white-default bg-white-02 rounded
-    hover:bg-white-03 transition-colors duration-150;
+    w-full px-5 py-3 mb-10
+    text-black bg-grey-lighter
+    rounded hover:bg-grey-light
+    transition-colors duration-75 ease-in-out;
 }
 
 .aside-user.active {
-    @apply bg-white-02;
+    /*@apply bg-white-02;*/
+}
+
+.aside-user-info {
+    @apply flex flex-col;
+}
+
+.aside-user-info h3 {
+    @apply text-lg font-inter -tracking-wider;
+}
+
+.aside-user-info p {
+    @apply text-[0.75rem] font-montserrat text-grey-mid;
+}
+
+.aside-user-name {
+    @apply font-semibold;
 }
 
 .top-navigation {
-    @apply flex justify-between items-center
-    px-10 h-16
-    border-b border-b-white-01 text-white-default;
+    @apply flex justify-between
+    px-10 h-16 font-instrument font-medium
+    border-b border-b-grey-light;
 }
 
 .nav-list {
@@ -52,8 +70,8 @@ main {
 }
 
 .nav-link {
-    @apply text-white-default font-medium
-    hover:text-white-06 transition-colors duration-200 ease-in-out;
+    @apply text-black hover:text-grey-dark
+    transition-colors duration-75 ease-in-out;
 }
 
 .nav-link.active {

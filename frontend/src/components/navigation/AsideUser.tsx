@@ -10,8 +10,11 @@ export default function AsideUser() {
 
     return (
 	  <Link href="/" className={`aside-user ${isCurrentPath ? ' active' : ''}`}>
-		 <h3>Guest</h3>
-		 {isCurrentPath ? <IoSettingsSharp /> : <IoSettingsOutline />}
+		 <div className="aside-user-info">
+			<h3>Hey, <span className="aside-user-name">Guest</span></h3>
+			<p>November 20, 2024</p>
+		 </div>
+		 {isCurrentPath ? <IoSettingsSharp size="1.5rem" /> : <IoSettingsOutline size="1.5rem" />}
 	  </Link>
     );
 }
