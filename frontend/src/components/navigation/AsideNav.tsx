@@ -1,12 +1,33 @@
+import AsideCategory from './AsideCategory';
+import AsideButton from './AsideButton';
 import AsideUser from './AsideUser';
+
+import { MdOutlineAccountCircle } from 'react-icons/md';
+import { GoGear } from 'react-icons/go';
+import { RiQuestionAnswerLine, RiUserAddLine } from 'react-icons/ri';
+import { IoCreateOutline, IoHeartOutline, IoCellularOutline, IoLogOutOutline, IoKeyOutline } from 'react-icons/io5';
 
 export default function AsideNav() {
     return (
-	  <aside className="flex flex-col items-center w-1/6 h-screenshadow-aside
-	  bg-background-dark border-r border-r-grey-light">
+	  <aside className="flex flex-col items-center w-1/6 min-w-64 h-screen shadow-base
+	  bg-background-dark border-r border-r-grey-light sticky">
 		 <div className="py-7 w-5/6 h-screen">
 			<AsideUser />
-			<ul></ul>
+			<AsideCategory label="Dashboard">
+			    <AsideButton icon={<IoCreateOutline size="1.35rem" />} href="/">Create Quiz</AsideButton>
+			    <AsideButton icon={<RiQuestionAnswerLine size="1.2rem" />} href="/">My Quizzes</AsideButton>
+			    <AsideButton icon={<IoHeartOutline size="1.2rem" />} href="/">Favorites</AsideButton>
+			    <AsideButton icon={<IoCellularOutline size="1.2rem" />} href="/">In Progress</AsideButton>
+			</AsideCategory>
+			<AsideCategory label="User">
+			    <AsideButton icon={<MdOutlineAccountCircle size="1.25rem" />} href="/">My Profile</AsideButton>
+			    <AsideButton icon={<GoGear size="1.2rem" />} href="/">Settings</AsideButton>
+			</AsideCategory>
+			<AsideCategory label="Actions">
+			    <AsideButton icon={<IoKeyOutline size="1.2rem" />} href="/">Login</AsideButton>
+			    <AsideButton icon={<RiUserAddLine size="1.2rem" />} href="/">Signup</AsideButton>
+			    <AsideButton icon={<IoLogOutOutline size="1.2rem" />} href="/">Logout</AsideButton>
+			</AsideCategory>
 		 </div>
 	  </aside>
     );

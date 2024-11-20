@@ -10,7 +10,7 @@ export default {
 	   extend: {
 		  colors: {
 			 primary: {
-				light: '#2962EB',
+				light: '#3d7aeb',
 				dark: '#1958F7'
 			 },
 			 background: {
@@ -19,8 +19,10 @@ export default {
 				dark: '#f1f3ef'
 			 },
 			 grey: {
+				lightest: '#EFEFEE',
 				lighter: '#E5E5E4',
 				light: '#DCDDDC',
+				base: '#A2A2A2',
 				mid: '#676667',
 				dark: '#565858'
 			 }
@@ -31,7 +33,7 @@ export default {
 			 instrument: ['"Instrument Sans"', 'Poppins', 'Arial']
 		  },
 		  boxShadow: {
-			 aside: '0 0 5px rgba(0, 0, 0, 0.1)'
+			 base: '0 1px 1px rgba(0, 0, 0, 0.1)'
 		  }
 	   }
     },
