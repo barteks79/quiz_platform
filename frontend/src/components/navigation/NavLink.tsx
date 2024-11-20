@@ -14,7 +14,9 @@ export default function NavLink({ href, children }: NavLinkProps) {
 
     return (
 	  <li>
-		 <Link className={`nav-link ${href === path && 'active'}`} href={href}>{children}</Link>
+		 <Link className="text-black hover:text-grey-dark transition-colors duration-75 ease-in-out" href={href}>
+			{children}
+		 </Link>
 	  </li>
     );
 }

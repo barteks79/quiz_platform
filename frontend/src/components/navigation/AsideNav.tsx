@@ -2,10 +2,11 @@ import AsideUser from './AsideUser';
 
 export default function AsideNav() {
     return (
-	  <aside className="aside-navigation">
-		 <div className="aside-wrapper">
+	  <aside className="flex flex-col items-center w-1/6 h-screenshadow-aside
+	  bg-background-dark border-r border-r-grey-light">
+		 <div className="py-7 w-5/6 h-screen">
 			<AsideUser />
-			<ul className="aside-list"></ul>
+			<ul></ul>
 		 </div>
 	  </aside>
     );
