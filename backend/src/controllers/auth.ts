@@ -21,25 +21,25 @@ export const loginUser = async (req: LoginReq, res: Response, next: NextFunction
    const { email } = req.body;
    const user: IUser | null = await User.findOne({ email });
    if (!user) {
-      const error = new MyError('Invalid email or password.', 401);
-      return next(error);
+	  const error = new MyError('Invalid email or password.', 401);
+	  return next(error);
    }
 
    // PASSWORD MATCHING
    const { password } = req.body;
    const doMatch = await compare(password, user.password);
    if (!doMatch) {
-      const error = new MyError('Invalid email or password.', 401);
-      return next(error);
+	  const error = new MyError('Invalid email or password.', 401);
+	  return next(error);
    }
 
    try {
-      // GENERATING TOKEN
-      const token = sign({ userId: user._id }, process.env.JWT_KEY || '', { expiresIn: '3h' });
-      const expirationTime = new Date().getTime() + 1000 * 60 * 60 * 3;
-      res.status(200).json({ message: 'Logged in successfully.', token, expirationTime });
+	  // GENERATING TOKEN
+	  const token = sign({ userId: user._id }, process.env.JWT_KEY || '', { expiresIn: '3h' });
+	  const expirationTime = new Date().getTime() + 1000 * 60 * 60 * 3;
+	  res.status(200).json({ message: 'Logged in successfully.', token, expirationTime });
    } catch (err: unknown) {
-      catchHandler(err, next);
+	  catchHandler(err, next);
    }
 };
 
@@ -52,8 +52,8 @@ export const signupUser = async (req: SignupReq, res: Response, next: NextFuncti
    const { email } = req.body;
    const existingUser: IUser | null = await User.findOne({ email });
    if (existingUser) {
-      const error = new MyError('Email already in use.', 401);
-      return next(error);
+	  const error = new MyError('Email already in use.', 401);
+	  return next(error);
    }
 
    // CREATING USER
@@ -62,10 +62,10 @@ export const signupUser = async (req: SignupReq, res: Response, next: NextFuncti
    const createdUser: IUser = new User({ name, age, email, password: hashedPassword, favorites: [], completed: [] });
 
    try {
-      await createdUser.save();
-      res.status(201).json({ message: 'Signed up successfully.', userId: createdUser._id });
+	  await createdUser.save();
+	  res.status(201).json({ message: 'Signed up successfully.', userId: createdUser._id });
    } catch (err: unknown) {
-      catchHandler(err, next);
+	  catchHandler(err, next);
    }
 };
 
@@ -84,9 +84,9 @@ export const editUser = async (req: EditReq, res: Response, next: NextFunction) 
    if (user.age !== age) user.age = age;
 
    try {
-      await user.save();
-      res.status(200).json({ message: 'User profile updated successfully', userId: user._id });
+	  await user.save();
+	  res.status(200).json({ message: 'User profile updated successfully', userId: user._id });
    } catch (err) {
-      catchHandler(err, next);
+	  catchHandler(err, next);
    }
 };

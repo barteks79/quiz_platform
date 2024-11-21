@@ -12,23 +12,23 @@ export interface IRating extends Document {
 
 const ratingSchema = new Schema<IRating>({
    rate: {
-      type: Number,
-      required: true
+	  type: Number,
+	  required: true
    },
    message: {
-      type: String,
-      required: true
+	  type: String,
+	  required: true
    },
    quizId: {
-      type: SchemaTypes.ObjectId,
-      ref: 'Quiz',
-      required: true
+	  type: SchemaTypes.ObjectId,
+	  ref: 'Quiz',
+	  required: true
    },
    creatorId: {
-      type: SchemaTypes.ObjectId,
-      ref: 'User',
-      required: true
+	  type: SchemaTypes.ObjectId,
+	  ref: 'User',
+	  required: true
    }
 }, { timestamps: true });
 
-export default model<IRating>('Rating', ratingSchema)
+export default model<IRating>('Rating', ratingSchema);

@@ -7,12 +7,12 @@ import {
    editQuiz,
    deleteQuiz,
    quizToggleFavorites,
-   quizToggleCompleted,
+   quizToggleCompleted
 } from '../controllers/quiz';
 import {
    getAllQuizzesValidation,
    createQuizValidation,
-   quizToCompletedValidation,
+   quizToCompletedValidation
 } from '../util/validation';
 
 const router: IRouter = Router();

@@ -26,10 +26,10 @@ export const addRating = async (req: AddRatingReq, res: Response, next: NextFunc
    const rating: IRating = new Rating({ rate, message, creatorId: req.userId, quizId: quiz._id });
 
    try {
-      await rating.save();
-      res.status(201).json({ message: 'Rating uploaded successfully.', ratingId: rating._id });
+	  await rating.save();
+	  res.status(201).json({ message: 'Rating uploaded successfully.', ratingId: rating._id });
    } catch (err) {
-      catchHandler(err, next);
+	  catchHandler(err, next);
    }
 };
 
@@ -44,14 +44,14 @@ export const getRatings = async (req: GetRatingsReq, res: Response, next: NextFu
    if (!quiz) return;
 
    try {
-      const { page, perPage } = req.body;
-      const ratingsAmount = await Rating.countDocuments({ quizId: quiz._id });
-      const ratings = await Rating.find({
-         quizId: quiz._id
-      }).skip((page - 1) * perPage).limit(perPage).select('-_id rate message createdAt').populate('creatorId', '-_id name');
+	  const { page, perPage } = req.body;
+	  const ratingsAmount = await Rating.countDocuments({ quizId: quiz._id });
+	  const ratings = await Rating.find({
+		 quizId: quiz._id
+	  }).skip((page - 1) * perPage).limit(perPage).select('-_id rate message createdAt').populate('creatorId', '-_id name');
 
-      res.status(200).json({ message: 'Ratings fetched successfully.', ratingsAmount, ratings })
+	  res.status(200).json({ message: 'Ratings fetched successfully.', ratingsAmount, ratings });
    } catch (err) {
-      catchHandler(err, next);
+	  catchHandler(err, next);
    }
 };

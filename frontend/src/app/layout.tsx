@@ -6,22 +6,22 @@ import { type Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'NextJS Quiz Platform',
-    description: 'Share quizzes with all your friends!'
+   title: 'NextJS Quiz Platform',
+   description: 'Share quizzes with all your friends!'
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
-    return (
+   return (
 	  <html lang="en">
 		 <body className="flex w-full bg-background-mid">
 			<AsideNav />
 			<main className="w-full">
-			    <TopNav />
-			    <div className="block w-5/6 my-0 mx-auto">
-				   {children}
-			    </div>
+			   <TopNav />
+			   <div className="block w-5/6 my-0 mx-auto">
+				  {children}
+			   </div>
 			</main>
 		 </body>
 	  </html>
-    );
+   );
 }

@@ -5,7 +5,7 @@ import { runServer } from './util/server';
 
 import authRoutes from './routes/auth';
 import quizRouter from './routes/quiz';
-import ratingRoutes from './routes/rating'
+import ratingRoutes from './routes/rating';
 
 import cors from './middlewares/cors';
 import error from './middlewares/error';

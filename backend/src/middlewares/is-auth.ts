@@ -14,8 +14,8 @@ export default (req: IsAuthReq, res: Response, next: NextFunction) => {
    // CHECKING FOR AUTH HEADER
    const authHeader: string | undefined = req.get('Authorization');
    if (!authHeader) {
-      const error = new MyError('Not authenticated.', 401);
-      return next(error);
+	  const error = new MyError('Not authenticated.', 401);
+	  return next(error);
    }
 
    // GETTING TOKEN
@@ -23,11 +23,11 @@ export default (req: IsAuthReq, res: Response, next: NextFunction) => {
    let decodedToken: JwtPayload | string;
 
    try {
-      decodedToken = verify(token, process.env.JWT_KEY || '');
-      req.userId = (decodedToken as JwtPayload).userId;
-      next();
+	  decodedToken = verify(token, process.env.JWT_KEY || '');
+	  req.userId = (decodedToken as JwtPayload).userId;
+	  next();
    } catch (err) {
-      const error = new MyError('Not authenticated.', 401);
-      return next(error);
+	  const error = new MyError('Not authenticated.', 401);
+	  return next(error);
    }
 }

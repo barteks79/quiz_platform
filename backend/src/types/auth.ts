@@ -7,25 +7,25 @@ export interface IsAuthReq extends Request {
 
 export interface LoginReq extends Request {
    body: {
-      email: string;
-      password: string;
+	  email: string;
+	  password: string;
    };
 }
 
 export interface SignupReq extends Request {
    body: {
-      name: string;
-      email: string;
-      password: string;
-      confirmPassword: string;
-      age: number;
+	  name: string;
+	  email: string;
+	  password: string;
+	  confirmPassword: string;
+	  age: number;
    };
 }
 
 export interface EditReq extends Request {
    userId?: ObjectId;
    body: {
-      name: string;
-      age: number;
+	  name: string;
+	  age: number;
    };
 }

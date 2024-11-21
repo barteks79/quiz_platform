@@ -13,46 +13,46 @@ export interface IUser extends Document {
 
 const userSchema = new Schema<IUser>({
    name: {
-      type: String,
-      required: true
+	  type: String,
+	  required: true
    },
    email: {
-      type: String,
-      required: true,
+	  type: String,
+	  required: true
    },
    password: {
-      type: String,
-      required: true
+	  type: String,
+	  required: true
    },
    age: {
-      type: Number,
-      required: true
+	  type: Number,
+	  required: true
    },
    favorites: [
-      {
-         quizId: {
-            type: SchemaTypes.ObjectId,
-            ref: 'Quiz',
-            required: true,
-         },
-         isCompleted: {
-            type: Boolean,
-            required: true,
-         }
-      }
+	  {
+		 quizId: {
+			type: SchemaTypes.ObjectId,
+			ref: 'Quiz',
+			required: true
+		 },
+		 isCompleted: {
+			type: Boolean,
+			required: true
+		 }
+	  }
    ],
    completed: [
-      {
-         quizId: {
-            type: SchemaTypes.ObjectId,
-            ref: 'Quiz',
-            required: true,
-         },
-         points: {
-            type: Number,
-            required: true
-         }
-      }
+	  {
+		 quizId: {
+			type: SchemaTypes.ObjectId,
+			ref: 'Quiz',
+			required: true
+		 },
+		 points: {
+			type: Number,
+			required: true
+		 }
+	  }
    ]
 });
 

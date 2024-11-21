@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express';
 import type { ValidationError } from 'express-validator';
 
 type ErrorProperties = { message: string; status: number; inputs?: ValidationError[] }

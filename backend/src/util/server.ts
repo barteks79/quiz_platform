@@ -3,6 +3,7 @@ import type { Application } from 'express';
 
 // DOTENV
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 // DATABASE
@@ -11,12 +12,12 @@ const DB_URI: string = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_CLUSTER}.nj
 
 export const runServer = async (app: Application, port: number) => {
    try {
-      await connect(DB_URI);
+	  await connect(DB_URI);
    } catch (err) {
-      console.error(err);
+	  console.error(err);
    } finally {
-      app.listen(port, () => {
-         console.log(`Listening on port ${port}...`);
-      });
+	  app.listen(port, () => {
+		 console.log(`Listening on port ${port}...`);
+	  });
    }
 };

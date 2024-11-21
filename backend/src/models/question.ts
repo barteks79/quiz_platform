@@ -10,28 +10,28 @@ export interface IQuestion extends Document {
 
 const questionSchema = new Schema<IQuestion>({
    content: {
-      type: String,
-      required: true,
+	  type: String,
+	  required: true
    },
    answers: [
-      {
-         content: {
-            type: String,
-            required: true
-         },
-         isCorrect: {
-            type: Boolean,
-            required: true
-         }
-      }
+	  {
+		 content: {
+			type: String,
+			required: true
+		 },
+		 isCorrect: {
+			type: Boolean,
+			required: true
+		 }
+	  }
    ],
    points: {
-      type: Number,
-      required: true,
+	  type: Number,
+	  required: true
    },
    isMultipleChoice: {
-      type: Boolean,
-      required: true,
+	  type: Boolean,
+	  required: true
    }
 });
 
