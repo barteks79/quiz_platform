@@ -2,8 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-
-import { type IconType } from 'react-icons';
 import { type ReactNode } from 'react';
 
 type AsideButtonProps = {

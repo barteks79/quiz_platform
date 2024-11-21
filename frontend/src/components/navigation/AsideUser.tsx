@@ -1,8 +1,12 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { getCurrentDateText } from '@/lib/utils';
+
 import Link from 'next/link';
 import { SiHey } from 'react-icons/si';
+
+const currentDateText = getCurrentDateText();
 
 export default function AsideUser() {
     const path = usePathname();
@@ -13,7 +17,7 @@ export default function AsideUser() {
 	   rounded shadow-sm hover:bg-grey-light transition-colors duration-75 ease-in-out">
 		 <div className="flex flex-col">
 			<h3 className="text-lg font-inter -tracking-wider">Hey, <span className="font-semibold">Guest</span></h3>
-			<p className="text-[0.75rem] font-montserrat text-grey-mid">November 20, 2024</p>
+			<p className="text-[0.75rem] font-montserrat text-grey-mid">{currentDateText}</p>
 		 </div>
 		 <SiHey size="1.75rem" />
 	  </Link>
