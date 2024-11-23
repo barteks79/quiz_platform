@@ -11,10 +11,15 @@ type NavLinkProps = {
 
 export default function NavLink({ href, children }: NavLinkProps) {
    const path = usePathname();
+   const isCurrentPage = path === href;
 
    return (
 	  <li>
-		 <Link className="text-black hover:text-grey-dark transition-colors duration-75 ease-in-out" href={href}>
+		 <Link
+			className={`px-5 py-2 rounded transition-colors ease-in-out 
+			${isCurrentPage ? 'text-primary-dark bg-primary-bg-light hover:bg-primary-bg-dark duration-75'
+			   : 'text-black hover:text-primary-dark hover:bg-primary-bg-light duration 125'}`}
+			href={href}>
 			{children}
 		 </Link>
 	  </li>

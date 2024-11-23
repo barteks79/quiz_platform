@@ -17,9 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<AsideNav />
 			<main className="w-full">
 			   <TopNav />
-			   <div className="block w-5/6 my-0 mx-auto">
-				  {children}
-			   </div>
+			   {children}
 			</main>
 		 </body>
 	  </html>

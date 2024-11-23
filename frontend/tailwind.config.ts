@@ -10,8 +10,11 @@ export default {
 	   extend: {
 		  colors: {
 			 primary: {
-				light: '#3d7aeb',
-				dark: '#1958F7'
+				light: '#2c73fd',
+				dark: '#1958F7',
+				border: '#8fadfa',
+				'bg-light': '#7ACDFF19',
+				'bg-dark': '#7ACDFF26'
 			 },
 			 background: {
 				light: '#FAFBFB',

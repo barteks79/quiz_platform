@@ -9,7 +9,7 @@ export default function AsideCategory({ label, children }: AsideCategoryProps) {
    return (
 	  <>
 		 <label className="inline-block mt-8 mb-1 font-inter text-grey-base font-light">{label}</label>
-		 <ul className="flex flex-col">
+		 <ul className="flex flex-col w-full">
 			{children}
 		 </ul>
 	  </>
