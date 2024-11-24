@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
    return (
 	  <html lang="en">
-		 <body className="flex w-full bg-background-mid">
+		 <body className="flex w-full bg-background-light">
 			<AsideNav />
 			<main className="w-full">
 			   <TopNav />

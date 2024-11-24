@@ -7,10 +7,11 @@ import { cn } from '@/lib/utils';
 type FilterCheckboxProps = {
    children: ReactNode;
    name: string;
+   isDefault?: boolean;
 }
 
-export default function FilterCheckbox({ children, name }: FilterCheckboxProps) {
-   const [isChecked, setIsChecked] = useState<boolean>(false);
+export default function FilterCheckbox({ children, name, isDefault = false }: FilterCheckboxProps) {
+   const [isChecked, setIsChecked] = useState<boolean>(isDefault);
    const inputRef = useRef<HTMLInputElement>(null);
 
    const toggleInput = () => {

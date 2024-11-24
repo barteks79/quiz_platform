@@ -10,7 +10,7 @@ import { IoCreateOutline, IoHeartOutline, IoCellularOutline, IoLogOutOutline, Io
 export default function AsideNav() {
    return (
 	  <aside className="flex flex-col items-center w-1/6 min-w-64 h-screen
-	  bg-background-dark border-r border-r-grey-light sticky">
+	  bg-background-dark border-r border-r-grey-light sticky top-0">
 		 <div className="py-7 w-5/6 h-screen">
 			<AsideUser />
 			<AsideCategory label="Dashboard">

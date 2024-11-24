@@ -16,9 +16,9 @@ export default function NavLink({ href, children }: NavLinkProps) {
    return (
 	  <li>
 		 <Link
-			className={`px-5 py-2 rounded transition-colors ease-in-out 
-			${isCurrentPage ? 'text-primary-dark bg-primary-bg-light hover:bg-primary-bg-dark duration-75'
-			   : 'text-black hover:text-primary-dark hover:bg-primary-bg-light duration 125'}`}
+			className={`px-5 py-2 rounded transition-all ease-in-out 
+			${isCurrentPage ? 'shadow-base text-primary-dark bg-primary-bg-light hover:bg-primary-bg-dark duration-75'
+			   : 'hover:shadow-base text-black hover:text-primary-dark hover:bg-primary-bg-light duration 125'}`}
 			href={href}>
 			{children}
 		 </Link>

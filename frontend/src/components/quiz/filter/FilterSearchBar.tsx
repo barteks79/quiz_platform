@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { IoSearchOutline } from 'react-icons/io5';
+import { IoSearchSharp } from 'react-icons/io5';
 import { cn } from '@/lib/utils';
 
 export default function FilterSearchBar() {
@@ -15,7 +15,7 @@ export default function FilterSearchBar() {
 		 className={cn('flex items-center gap-4 px-4 bg-white py-2 rounded-lg shadow-base border ' +
 			'border-white transition-colors duration-75 ease-in-out cursor-pointer w-full',
 			{ 'border-primary-light': isFocused })}>
-		 <IoSearchOutline color={isFocused ? '#3D7AEB' : '#000'} />
+		 <IoSearchSharp size="1.2rem" color={isFocused ? '#3D7AEB' : '#000'} />
 		 <input
 			id="search"
 			name="search"
