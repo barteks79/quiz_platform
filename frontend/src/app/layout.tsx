@@ -1,5 +1,6 @@
 import TopNav from '@/components/navigation/TopNav';
 import AsideNav from '@/components/navigation/AsideNav';
+import Footer from '@/components/footer/Footer';
 
 import { type PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<main className="w-full">
 			   <TopNav />
 			   {children}
+			   {/*<Footer />*/}
 			</main>
 		 </body>
 	  </html>
