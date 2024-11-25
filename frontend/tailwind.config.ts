@@ -42,7 +42,7 @@ export default {
 			quiz: 'repeat(4, 1fr)'
 		 },
 		 gridTemplateColumns: {
-			quiz: 'repeat(auto-fit, minmax(300px, 1fr))'
+			quiz: 'repeat(auto-fit, minmax(400px, 1fr))'
 		 }
 	  }
    },

@@ -11,8 +11,8 @@ const exampleQuizCardProps = {
 
 export default function AllQuizzesPage() {
    return (
-	  <section className="h-screen px-1 lg:px-3 xl:px-10 2xl:px-20 py-16">
-		 <div className="grid grid-rows-quiz grid-cols-quiz gap-10">
+	  <section className="flex justify-center w-full py-8 xl:py-12 2xl:py-16 transition-[padding] duration-150">
+		 <div className="grid grid-rows-quiz grid-cols-quiz gap-10 w-[90%]">
 			<QuizCard {...exampleQuizCardProps} />
 			<QuizCard {...exampleQuizCardProps} />
 			<QuizCard {...exampleQuizCardProps} />

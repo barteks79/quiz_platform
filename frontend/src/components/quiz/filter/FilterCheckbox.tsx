@@ -23,8 +23,8 @@ export default function FilterCheckbox({ children, name, isDefault = false }: Fi
 
    return (
 	  <>
-		 <button className={cn('flex items-center gap-5 px-4 py-2 bg-grey-lightest rounded-lg shadow-base ' +
-			'hover:bg-grey-light transition-all duration-125 ease-in-out border',
+		 <button className={cn('flex items-center gap-2 2xl:gap-5 px-3 2xl:px-4 py-2 bg-grey-lightest rounded-lg shadow-base ' +
+			'text-sm 2xl:text-base hover:bg-grey-light transition-all duration-125 ease-in-out border',
 			{ 'text-primary-dark border-primary-border': isChecked })}
 				 onClick={toggleInput} type="button">
 			<p className="font-instrument font-medium text-[0.925rem]">{children}</p>
