@@ -43,7 +43,8 @@ export default {
 		 },
 		 gridTemplateColumns: {
 			quiz: 'repeat(auto-fit, minmax(400px, 1fr))'
-		 }
+		 },
+		 animation: { 'pulse-fast': 'pulse 0.8s ease-in-out infinite' }
 	  }
    },
    plugins: []
