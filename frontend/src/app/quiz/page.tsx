@@ -7,14 +7,14 @@ const exampleQuizCardProps = {
    image: '/test-images/fruits.jpg',
    slug: 'general-knowledge-of-fruits',
    favorites: 23,
-   ageCategory: 16
+   ageCategory: 18
 };
 
 export default function AllQuizzesPage() {
    return (
 	  <section className="flex justify-center w-full py-8 2xl:py-16 transition-[padding] duration-150">
 		 {/*<QuizzesLoader />*/}
-		 <div className="grid grid-rows-quiz grid-cols-quiz gap-10 w-[90%]">
+		 <div className="grid grid-cols-quiz gap-10 w-[90%]">
 			<QuizCard {...exampleQuizCardProps} />
 			<QuizCard {...exampleQuizCardProps} />
 			<QuizCard {...exampleQuizCardProps} />

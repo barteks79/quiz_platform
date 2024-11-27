@@ -38,11 +38,8 @@ export default {
 		 boxShadow: {
 			base: '0 1px 1px rgba(0, 0, 0, 0.1)'
 		 },
-		 gridTemplateRows: {
-			quiz: 'repeat(4, 1fr)'
-		 },
 		 gridTemplateColumns: {
-			quiz: 'repeat(auto-fit, minmax(400px, 1fr))'
+			quiz: 'repeat(auto-fit, minmax(350px, 1fr))'
 		 },
 		 animation: { 'pulse-fast': 'pulse 0.8s ease-in-out infinite' }
 	  }
