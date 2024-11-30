@@ -22,6 +22,7 @@ export default {
 			   dark: '#f1f3ef'
 			},
 			grey: {
+			   card: '#f6f6f5',
 			   lightest: '#EFEFEE',
 			   lighter: '#E5E5E4',
 			   light: '#DCDDDC',
@@ -39,7 +40,7 @@ export default {
 			base: '0 1px 1px rgba(0, 0, 0, 0.1)'
 		 },
 		 gridTemplateColumns: {
-			quiz: 'repeat(auto-fit, minmax(350px, 1fr))'
+			quiz: 'repeat(auto-fit, minmax(325px, 1fr))'
 		 },
 		 animation: { 'pulse-fast': 'pulse 0.8s ease-in-out infinite' }
 	  }
