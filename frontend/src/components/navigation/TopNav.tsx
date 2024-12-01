@@ -7,7 +7,7 @@ export default function TopNav() {
 		 top-0 bg-background-mid z-10">
 		 <ul className="flex items-center gap-3">
 			<NavLink href="/">Home</NavLink>
-			<NavLink href="/quiz">All Quizzes</NavLink>
+			<NavLink href="/quiz?page=1">All Quizzes</NavLink>
 			<NavLink href="/quiz/popular">Popular</NavLink>
 		 </ul>
 		 <ul className="flex items-center gap-3">

@@ -1,4 +1,5 @@
-import BreadCrumb from '@/components/ui/Breadcrumb';
+import BreadCrumb from '@/components/ui/BreadCrumb';
+import Pagination from '@/components/ui/Pagination';
 import QuizCard from '@/components/quiz/card/QuizCard';
 import QuizzesLoader from '@/components/loaders/QuizzesLoader';
 
@@ -55,10 +56,15 @@ const exampleBreadCrumb = [
    { label: 'Quiz', href: '/quiz', isActive: true }
 ];
 
-export default function AllQuizzesPage() {
+export default async function AllQuizzesPage({ searchParams }: { searchParams: Promise<{ page: string }> }) {
+   const { page } = await searchParams;
+
    return (
 	  <section className="flex flex-col items-center w-full transition-[padding] duration-150">
-		 <BreadCrumb items={exampleBreadCrumb} />
+		 <div className="flex justify-between py-3 2xl:py-5 px-2 w-[90%]">
+			<BreadCrumb items={exampleBreadCrumb} />
+			<Pagination currentPage={+page || 1} pagesAmount={2} />
+		 </div>
 		 {/*<QuizzesLoader />*/}
 		 <div className="grid grid-cols-quiz gap-5 w-[90%]">
 			{exampleQuizCards.map(quiz => (

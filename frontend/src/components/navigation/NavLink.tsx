@@ -11,7 +11,7 @@ type NavLinkProps = {
 
 export default function NavLink({ href, children }: NavLinkProps) {
    const path = usePathname();
-   const isCurrentPage = path === href;
+   const isCurrentPage = path === href.split('?')[0];
 
    return (
 	  <li>
