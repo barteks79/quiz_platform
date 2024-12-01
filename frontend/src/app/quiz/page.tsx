@@ -1,3 +1,4 @@
+import BreadCrumb from '@/components/ui/Breadcrumb';
 import QuizCard from '@/components/quiz/card/QuizCard';
 import QuizzesLoader from '@/components/loaders/QuizzesLoader';
 
@@ -49,9 +50,15 @@ const exampleQuizCards = [
    }
 ];
 
+const exampleBreadCrumb = [
+   { label: 'Home', href: '/' },
+   { label: 'Quiz', href: '/quiz', isActive: true }
+];
+
 export default function AllQuizzesPage() {
    return (
-	  <section className="flex justify-center w-full py-8 2xl:py-16 transition-[padding] duration-150">
+	  <section className="flex flex-col items-center w-full transition-[padding] duration-150">
+		 <BreadCrumb items={exampleBreadCrumb} />
 		 {/*<QuizzesLoader />*/}
 		 <div className="grid grid-cols-quiz gap-5 w-[90%]">
 			{exampleQuizCards.map(quiz => (
