@@ -63,7 +63,7 @@ export default async function AllQuizzesPage({ searchParams }: { searchParams: P
 	  <section className="flex flex-col items-center w-full transition-[padding] duration-150">
 		 <div className="flex justify-between py-3 2xl:py-5 px-2 w-[90%]">
 			<BreadCrumb items={exampleBreadCrumb} />
-			<Pagination currentPage={+page || 1} pagesAmount={2} />
+			<Pagination currentPage={+page || 1} pagesAmount={10} />
 		 </div>
 		 {/*<QuizzesLoader />*/}
 		 <div className="grid grid-cols-quiz gap-5 w-[90%]">

@@ -21,9 +21,12 @@ function PreviousNextButton({ currentPage, label, isDisabled }: {
 }) {
    return (
 	  <Link
-		 href={isDisabled ? '' : `/quiz?page=${currentPage + (label === 'Previous' ? -1 : 1)}`}
-		 className={cn('flex items-center gap-2 px-3 py-1 mr-1 bg-grey-lightest rounded-md shadow-base cursor-default', {
-			'hover:bg-grey-light transition-colors duration-125 ease-in-out cursor-pointer': !isDisabled,
+
+		 href={`/quiz?page=${currentPage + (label === 'Previous' ? -1 : 1)}`}
+		 className={cn('flex items-center gap-2 px-3 py-1 mr-1 bg-primary-bg-light text-primary-dark rounded-md ' +
+			'shadow-base cursor-default', {
+			'hover:bg-primary-bg-dark transition-colors duration-125 ease-in-out cursor-pointer': !isDisabled,
+			'pointer-events-none': isDisabled,
 			'ml-1': label === 'Next'
 		 })}>
 		 {label === 'Previous' && <IoChevronBackSharp size="0.9rem" />}
@@ -41,7 +44,7 @@ export default function Pagination({ currentPage, pagesAmount }: { currentPage: 
    }
 
    return (
-	  <menu className="flex gap-2 font-medium">
+	  <menu className="flex gap-2 font-medium text-sm 2xl:text-lg">
 		 <PreviousNextButton currentPage={currentPage} label="Previous" isDisabled={currentPage === 1} />
 		 <PageButtonNumber page={1} currentPage={currentPage} />
 

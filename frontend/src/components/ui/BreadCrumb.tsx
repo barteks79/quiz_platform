@@ -23,7 +23,7 @@ function BreadCrumbItem({ item, idx }: { item: BreadCrumb, idx: number }) {
 
 export default function BreadCrumb({ items }: { items: BreadCrumb[] }) {
    return (
-	  <menu className="flex items-center text-grey-mid text-lg">
+	  <menu className="flex items-center text-grey-mid text-md 2xl:text-lg">
 		 {items.map((item, idx) => <BreadCrumbItem item={item} idx={idx} key={idx} />)}
 	  </menu>
    );
