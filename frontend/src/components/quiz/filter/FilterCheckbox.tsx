@@ -29,7 +29,7 @@ export default function FilterCheckbox({ children, name, isDefault = false }: Fi
 			variant="outline"
 			isActive={isChecked}
 			icon={isChecked ? <IoRemoveSharp /> : <IoAddSharp />}
-			className="2xl:gap-5 px-3 2xl:px-4 py-2 text-sm 2xl:text-base">
+			className="hidden xl:flex 2xl:gap-5 px-3 2xl:px-4 py-2 text-sm 2xl:text-base">
 			<p className="font-instrument font-medium text-sm 2xl:text-[0.925rem]">{children}</p>
 		 </Button>
 		 <input id={name} name={name} type="checkbox" hidden ref={inputRef} />
